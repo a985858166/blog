@@ -5,14 +5,14 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import xin.inote.mapper.LinkMapper;
 import xin.inote.mapper.OptionMapper;
 import xin.inote.mapper.UserMapper;
-import xin.inote.pojo.Option;
-import xin.inote.pojo.OptionExample;
-import xin.inote.pojo.User;
-import xin.inote.pojo.UserExample;
+import xin.inote.pojo.*;
 import xin.inote.service.AdminService;
 import xin.inote.util.Md5Password;
+
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -20,6 +20,43 @@ public class AdminServiceImpl implements AdminService {
     UserMapper userMapper;
     @Autowired
     OptionMapper optionMapper;
+    @Autowired
+    LinkMapper linkMapper;
+
+    @Override
+    public boolean editLink(Link link) {
+        LinkExample example = new LinkExample();
+        example.or().andLink_idEqualTo(link.getLink_id());
+        if (linkMapper.updateByExampleSelective(link,example)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean delLink(Link link) {
+        LinkExample example = new LinkExample();
+        example.or().andLink_idEqualTo(link.getLink_id());
+        if (linkMapper.deleteByExample(example)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addLink(Link link) {
+        if (linkMapper.insertSelective(link)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Link> getLink() {
+        LinkExample linkExample = new LinkExample();
+
+        return linkMapper.selectByExample(linkExample);
+    }
 
     @Override
     public boolean setNotice(String notice) {

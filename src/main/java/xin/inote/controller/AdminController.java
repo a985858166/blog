@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import xin.inote.pojo.Link;
 import xin.inote.service.AdminService;
 import xin.inote.service.InformationService;
 import xin.inote.util.Md5Password;
@@ -53,6 +54,39 @@ public class AdminController {
             map.put("status", "no");
         }
 
+        return map;
+    }
+    @RequestMapping(value = "/addLink")
+    @ResponseBody
+    public Map addLink(@RequestBody Link link){
+        Map<String, Object> map = new HashMap<>();
+        if (adminService.addLink(link)){
+            map.put("status", "ok");
+        }else {
+            map.put("status", "no");
+        }
+        return map;
+    }
+    @RequestMapping(value = "/delLink")
+    @ResponseBody
+    public Map delLink(@RequestBody Link link){
+        Map<String, Object> map = new HashMap<>();
+        if (adminService.delLink(link)){
+            map.put("status", "ok");
+        }else {
+            map.put("status", "no");
+        }
+        return map;
+    }
+    @RequestMapping(value = "/editLink")
+    @ResponseBody
+    public Map editLink(@RequestBody Link link){
+        Map<String, Object> map = new HashMap<>();
+        if (adminService.editLink(link)){
+            map.put("status", "ok");
+        }else {
+            map.put("status", "no");
+        }
         return map;
     }
 
