@@ -26,7 +26,6 @@ public class LoginController {
         }catch (AuthenticationException e){
             System.out.println("登录失败");
             model.addAttribute("error","验证失败");
-
             return "login";
         }
     }
