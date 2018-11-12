@@ -5,14 +5,18 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import xin.inote.service.UserService;
 
 @Controller
 @RequestMapping("")
 public class LoginController {
+    @Autowired
+    UserService userService;
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(Model model, String username, String password){
         Subject subject = SecurityUtils.getSubject();
@@ -21,6 +25,7 @@ public class LoginController {
             subject.login(token);
             Session session = subject.getSession();
             session.setAttribute("subject",subject);
+            session.setAttribute("user",userService.getByName(username));
             System.out.println("登录成功");
             return "redirect:index";
         }catch (AuthenticationException e){

@@ -71,7 +71,7 @@
                 <li class="header">菜单</li>
                 <!-- Optionally, you can add icons to the links -->
                 <!-- <li class="active"><a href="home.html"><i class="fa fa-link"></i> <span>博客信息</span></a></li> -->
-                <li class="treeview">
+                <li class="treeview active">
                   <a href="#"><i class="fa fa-fw fa-book"></i> <span>文章</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -80,11 +80,11 @@
                   <ul class="treeview-menu">
                     <li><a href="/b-admin/allArticle">所有文章</a></li>
                     <li><a href="/b-admin/write">写文章</a></li>
-                    <li><a href="/b-admin/classify">文章分类</a></li>
+                    <li class="active"><a href="/b-admin/classify">文章分类</a></li>
                   </ul>
                 </li>
                 <li><a href="./评论管理.html"><i class="fa fa-fw fa-comments"></i> <span>评论</span></a></li>
-                <li class="active"><a href="/b-admin/link"><i class="fa fa-link"></i> <span>友情链接</span></a></li>
+                <li><a href="/b-admin/link"><i class="fa fa-link"></i> <span>友情链接</span></a></li>
                 <li><a href="/b-admin/notice"><i class="fa fa-fw fa-calendar-minus-o"></i><span>公告</span></a></li>
                 <li><a href="/b-admin/information"><i class="fa fa-fw fa-gear"></i><span>博客信息</span></a></li>
                 <li><a href="/"><i class="fa fa-fw fa-desktop"></i><span>返回首页</span></a></li>
@@ -102,7 +102,7 @@
         <section class="content">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">友情链接</h3>
+                    <h3 class="box-title">文章分类</h3>
 
                     <div class="box-tools">
                         <a href="#" id="btn_add" class="btn btn-primary" data-toggle="modal" data-target="#addModal">添加</a>
@@ -114,9 +114,9 @@
                         <table class="table table-striped table-bordered responsive table-hover" id="table" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th width="8%" class="min-mobile-l">网站id</th>
-                                <th width="8%" class="min-mobile-l">网站名称</th>
-                                <th width="10%" class="min-mobile-l">网站链接</th>
+                                <th width="5%" class="min-mobile-l">id</th>
+                                <th width="8%" class="min-mobile-l">分类名称</th>
+                                <th width="5%" class="min-mobile-l">权重</th>
                                 <th width="8%" class="min-mobile-l">操作</th>
                             </tr>
                             </thead>
@@ -139,14 +139,14 @@
                       <div class="modal-body">
 
                           <div class="form-group">
-                              <label for="add_link_name">网站名称</label>
-                              <input type="text" name="link_name" class="form-control" id="add_link_name" placeholder="网站名称">
-                              <h4 style="color: red" id="add_link_name_info"></h4>
+                              <label for="add_classify_name">分类名称</label>
+                              <input type="text" name="classify_name" class="form-control" id="add_classify_name" placeholder="分类名称">
+                              <h4 style="color: red" id="add_classify_name_info"></h4>
                           </div>
                           <div class="form-group">
-                              <label for="add_link_url">网站链接</label>
-                              <input type="text" name="link_url" class="form-control" id="add_link_url" placeholder="网站链接">
-                              <h4 style="color: red" id="add_link_url_info"></h4>
+                              <label for="add_classify_top">权重</label>
+                              <input type="text" name="link_url" class="form-control" id="add_classify_top" placeholder="只能输入正整数">
+                              <h4 style="color: red" id="add_classify_top_info"></h4>
                           </div>
                       </div>
                       <div class="modal-footer">
@@ -169,19 +169,19 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="edit_link_id">网站id</label>
-                            <input type="text" name="link_name" class="form-control" id="edit_link_id" placeholder="网站id" disabled>
-                            <h4 style="color: red" id="edit_link_id_info"></h4>
+                            <label for="edit_classify_id">id</label>
+                            <input type="text" name="classify_id" class="form-control" id="edit_classify_id" placeholder="网站id" disabled>
+                            <h4 style="color: red" id="edit_classify_id_info"></h4>
                         </div>
                         <div class="form-group">
-                            <label for="edit_link_name">网站名称</label>
-                            <input type="text" name="link_name" class="form-control" id="edit_link_name" placeholder="网站名称">
-                            <h4 style="color: red" id="edit_link_name_info"></h4>
+                            <label for="edit_classify_name">分类名称</label>
+                            <input type="text" name="classify_name" class="form-control" id="edit_classify_name" placeholder="分类名称">
+                            <h4 style="color: red" id="edit_classify_name_info"></h4>
                         </div>
                         <div class="form-group">
-                            <label for="edit_link_url">网站链接</label>
-                            <input type="text" name="link_url" class="form-control" id="edit_link_url" placeholder="网站链接">
-                            <h4 style="color: red" id="edit_link_url_info"></h4>
+                            <label for="edit_classify_top">权重</label>
+                            <input type="text" name="classify_top" class="form-control" id="edit_classify_top" placeholder="只能输入正整数">
+                            <h4 style="color: red" id="edit_classify_top_info"></h4>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -209,18 +209,18 @@
     var table;
     table = $("#table").DataTable({
         "ajax":{
-            "url":"/b-admin/linkData",
+            "url":"/b-admin/listClassify",
             "type":"post",
             "dataSrc":function (json) {
-                console.log(JSON.stringify(json['link']))
-                return json['link']
+                console.log(JSON.stringify(json['classify']))
+                return json['classify']
             }
         },
         columns:[
-            {"visible":false, data: "link_id"},
-            {data:'link_name'},
-            {data:'link_url'},
-            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑友链' style='color:gray'  class='btn btn-link edit-link' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除友链'  style='color:gray' class='btn btn-link del-link' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
+            {"visible":false, data: "classify_id"},
+            {data:'classify_name'},
+            {data:'classify_top'},
+            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑友链' style='color:gray'  class='btn btn-link edit-classify' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除友链'  style='color:gray' class='btn btn-link del-classify' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
         ],
         language: {
             "sProcessing": "处理中...",
@@ -247,20 +247,20 @@
             }
         }})
     //删除
-    $(document).on('click', '.del-link', function(e){
+    $(document).on('click', '.del-classify', function(e){
 
         //获取隐藏列的值
         var rowIndex = $(this).parents("tr").index();  //行号
-        var id = table.row(rowIndex).data().link_id;
+        var id = table.row(rowIndex).data().classify_id;
         console.log(id);
 
-        if (confirm("确定要删除该友情链接吗？")) {
+        if (confirm("确定要删除该文章分类吗？")) {
             var jsonData = {
-                "link_id":id
+                "classify_id":id
             }
             $.ajax({
                 type:'post',
-                url:'/b-admin/delLink',
+                url:'/b-admin/delClassify',
                 contentType:'application/json;charset=utf-8',//指定为json类型
                 //数据格式是json串，商品信息
                 data:JSON.stringify(jsonData),
@@ -272,16 +272,16 @@
         }
     });
     //编辑弹窗
-    $(document).on('click', '.edit-link', function(e){
+    $(document).on('click', '.edit-classify', function(e){
 
         //获取隐藏列的值
         var rowIndex = $(this).parents("tr").index();  //行号
-        var link_id = table.row(rowIndex).data().link_id;
-        var link_name = table.row(rowIndex).data().link_name;
-        var link_url = table.row(rowIndex).data().link_url;
-        $("#edit_link_id").val(link_id)
-        $("#edit_link_name").val(link_name)
-        $("#edit_link_url").val(link_url)
+        var classify_id = table.row(rowIndex).data().classify_id;
+        var classify_name = table.row(rowIndex).data().classify_name;
+        var classify_top = table.row(rowIndex).data().classify_top;
+        $("#edit_classify_id").val(classify_id)
+        $("#edit_classify_name").val(classify_name)
+        $("#edit_classify_top").val(classify_top)
         $('#editModal').modal();
 
 
@@ -289,27 +289,27 @@
 
     //保存
     $("#add_submit").click(function (event) {
-        var link_name = $("#add_link_name").val();
-        var link_url = $("#add_link_url").val();
-        if (link_name == ""){
-            $("#add_link_name_info").text("网站名称不能为空");
+        var classify_name = $("#add_classify_name").val();
+        var classify_top = $("#add_classify_top").val();
+        if (classify_name == ""){
+            $("#add_classify_name_info").text("分类名称不能为空");
             return
         }else {
-            $("#add_link_name_info").text("");
+            $("#add_classify_name_info").text("");
         }
-        if (link_url==""){
-            $("#add_link_url_info").text("网站链接不能为空");
+        if (classify_top==""){
+            $("#add_classify_top_info").text("权重不能为空");
             return
         }else {
-            $("#add_link_url_info").text("");
+            $("#add_classify_top_info").text("");
         }
-        var jsonData = {"link_name":link_name,"link_url":link_url}
-        $("#add_link_name").val("")
-        $("#add_link_url").val("")
+        var jsonData = {"classify_name":classify_name,"classify_top":classify_top}
+        $("#add_classify_name").val("")
+        $("#add_classify_top").val("")
         $("#add_submit").attr("data-dismiss","modal")
         $.ajax({
             type:'post',
-            url:'/b-admin/addLink',
+            url:'/b-admin/addClassify',
             contentType:'application/json;charset=utf-8',//指定为json类型
             //数据格式是json串，商品信息
             data:JSON.stringify(jsonData),
@@ -324,26 +324,26 @@
     //编辑
 
     $("#edit_submit").click(function (event) {
-        var link_id = $("#edit_link_id").val();
-        var link_name = $("#edit_link_name").val();
-        var link_url = $("#edit_link_url").val();
-        if (link_name == ""){
-            $("#edit_link_name_info").text("网站名称不能为空");
+        var classify_id = $("#edit_classify_id").val();
+        var classify_name = $("#edit_classify_name").val();
+        var classify_top = $("#edit_classify_top").val();
+        if (classify_name == ""){
+            $("#edit_classify_name_info").text("文章分类名称不能为空");
             return
         }else {
-            $("#edit_link_name_info").text("");
+            $("#edit_classify_name_info").text("");
         }
-        if (link_url==""){
-            $("#edit_link_url_info").text("网站链接不能为空");
+        if (classify_top==""){
+            $("#edit_classify_top_info").text("权重不能为空");
             return
         }else {
-            $("#edit_link_url_info").text("");
+            $("#edit_classify_top_info").text("");
         }
-        var jsonData = {"link_id":link_id,"link_name":link_name,"link_url":link_url}
+        var jsonData = {"classify_id":classify_id,"classify_name":classify_name,"classify_top":classify_top}
         $("#edit_submit").attr("data-dismiss","modal")
         $.ajax({
             type:'post',
-            url:'/b-admin/editLink',
+            url:'/b-admin/editClassify',
             contentType:'application/json;charset=utf-8',//指定为json类型
             //数据格式是json串，商品信息
             data:JSON.stringify(jsonData),

@@ -14,7 +14,7 @@ public class AdminLinkServiceImpl implements AdminLinkService {
     @Autowired
     LinkMapper linkMapper;
     @Override
-    public List<Link> getLink() {
+    public List<Link> listLink() {
         LinkExample linkExample = new LinkExample();
 
         return linkMapper.selectByExample(linkExample);

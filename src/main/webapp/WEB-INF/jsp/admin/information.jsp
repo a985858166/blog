@@ -78,15 +78,15 @@
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="./所有文章.html">所有文章</a></li>
-                    <li><a href="./写文章.html">写文章</a></li>
-                    <li><a href="./文章分类.html">文章分类</a></li>
+                    <li><a href="/b-admin/allArticle">所有文章</a></li>
+                    <li><a href="/b-admin/write">写文章</a></li>
+                    <li><a href="/b-admin/classify">文章分类</a></li>
                   </ul>
                 </li>
                 <li><a href="./评论管理.html"><i class="fa fa-fw fa-comments"></i> <span>评论</span></a></li>
-                <li><a href="/admin/link"><i class="fa fa-link"></i> <span>友情链接</span></a></li>
-                <li><a href="/admin/notice"><i class="fa fa-fw fa-calendar-minus-o"></i><span>公告</span></a></li>
-                <li class=" active"><a href="/admin/information"><i class="fa fa-fw fa-gear"></i><span>博客信息</span></a></li>
+                <li><a href="/b-admin/link"><i class="fa fa-link"></i> <span>友情链接</span></a></li>
+                <li><a href="/b-admin/notice"><i class="fa fa-fw fa-calendar-minus-o"></i><span>公告</span></a></li>
+                <li class=" active"><a href="/b-admin/information"><i class="fa fa-fw fa-gear"></i><span>博客信息</span></a></li>
                 <li><a href="/"><i class="fa fa-fw fa-desktop"></i><span>返回首页</span></a></li>
               </ul>
       <!-- /.sidebar-menu -->
@@ -101,7 +101,7 @@
                       <div class="box-header with-border">
                         <h3 class="box-title">博客信息</h3>
                       </div>
-                      <form role="form" method="post" action="/admin/setInformation">
+                      <form role="form" method="post" action="/b-admin/setInformation">
                         <div class="box-body">
                           <div class="form-group">
                             <label for="blogName">博客名称</label>
@@ -123,7 +123,7 @@
                             <div class="box-header with-border">
                               <h3 class="box-title">管理员信息</h3>
                             </div>
-                            <form role="form" action="/admin/setAdmin" method="post">
+                            <form role="form" action="/b-admin/setAdmin" method="post">
                               <div class="box-body">
                                 <div class="form-group">
                                     <label for="blogUserName">用户名</label>

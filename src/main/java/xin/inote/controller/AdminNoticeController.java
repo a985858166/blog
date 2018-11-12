@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("b-admin")
 public class AdminNoticeController {
     @Autowired
     AdminNoticeService adminNoticeService;

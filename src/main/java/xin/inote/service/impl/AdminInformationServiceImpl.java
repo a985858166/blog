@@ -34,8 +34,10 @@ public class AdminInformationServiceImpl implements AdminInformationService {
         user.setUser_username(blogUserName);
         user.setUser_password(passwordDB);
         user.setUser_salt(salt);
-        if (userMapper.updateByExampleSelective(user,userExample) == 1)
+        if (userMapper.updateByExampleSelective(user,userExample) == 1){
             return true;
+        }
+
         return false;
     }
 
@@ -54,11 +56,13 @@ public class AdminInformationServiceImpl implements AdminInformationService {
         blogNameOption.setOption_value(blogName);
         blogDomainOption.setOption_value(blogDomain);
         if (optionMapper.updateByExampleSelective(blogNameOption,blogNameExample) != 0 &&
-        optionMapper.updateByExampleSelective(blogDomainOption,blogDomainExample)!=0)
+        optionMapper.updateByExampleSelective(blogDomainOption,blogDomainExample)!=0){
             return true;
+        }
+
         return false;
     }
-
+    @Override
     public List<Option> getInformation() {
         OptionExample example = new OptionExample();
         //example.createCriteria().andOption_nameEqualTo("blogDomain");

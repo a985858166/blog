@@ -71,21 +71,21 @@
                 <li class="header">菜单</li>
                 <!-- Optionally, you can add icons to the links -->
                 <!-- <li class="active"><a href="home.html"><i class="fa fa-link"></i> <span>博客信息</span></a></li> -->
-                <li class="treeview">
+                <li class="treeview active">
                   <a href="#"><i class="fa fa-fw fa-book"></i> <span>文章</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="/b-admin/allArticle">所有文章</a></li>
+                    <li class="active"><a href="/b-admin/allArticle">所有文章</a></li>
                     <li><a href="/b-admin/write">写文章</a></li>
                     <li><a href="/b-admin/classify">文章分类</a></li>
                   </ul>
                 </li>
                 <li><a href="./评论管理.html"><i class="fa fa-fw fa-comments"></i> <span>评论</span></a></li>
                 <li><a href="/b-admin/link"><i class="fa fa-link"></i> <span>友情链接</span></a></li>
-                <li class="active"><a href="/b-admin/notice"><i class="fa fa-fw fa-calendar-minus-o"></i><span>公告</span></a></li>
+                <li><a href="/b-admin/notice"><i class="fa fa-fw fa-calendar-minus-o"></i><span>公告</span></a></li>
                 <li><a href="/b-admin/information"><i class="fa fa-fw fa-gear"></i><span>博客信息</span></a></li>
                 <li><a href="/"><i class="fa fa-fw fa-desktop"></i><span>返回首页</span></a></li>
               </ul>
@@ -95,21 +95,41 @@
       </aside>
       <!-- 右侧内容 -->
       <div id='home' class="content-wrapper">
-          <section class="content-header">
-              <h1>公告</h1>
-          </section>
-          <section class="content">
-              <div class="form-group">
-                  <div id="editor">
-                      ${notice}
-                  </div>
-                  <br>
-                  <br>
-                  <span style="float: right;">
-                      <button type="button" id="change" class="btn btn-primary btn-lg">更改公告</button>
-                  </span>
-          </section>
-      </div>
+        <%--<section class="content-header">--%>
+
+        <%--</section>--%>
+      
+        <section class="content">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">文章管理</h3>
+
+                    <div class="box-tools">
+
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered responsive table-hover" id="table" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th width="8%" class="min-mobile-l">文章id</th>
+                                <th width="8%" class="min-mobile-l">标题</th>
+                                <th width="10%" class="min-mobile-l">作者</th>
+                                <th width="8%" class="min-mobile-l">分类目录</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          
+        </section>
+
+    </div>
     <!-- ./wrapper -->
 
 
@@ -123,25 +143,72 @@
 <script src="../js/adminlte.min.js"></script>
 <script type="text/javascript" src="../js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="../js/dataTables.bootstrap.min.js" ></script>
-<script type="text/javascript" src="../wangEditor/wangEditor.min.js"></script>
-<script type="text/javascript">
-    var E = window.wangEditor
-    var editor = new E('#editor')
-    editor.create()
-    $(function(){
-        $("#change").click(function(){
-            var jsonData={"notice":editor.txt.html()}
+<script>
+    var table;
+    table = $("#table").DataTable({
+        "ajax":{
+            "url":"/b-admin/linkData",
+            "type":"post",
+            "dataSrc":function (json) {
+                console.log(JSON.stringify(json['link']))
+                return json['link']
+            }
+        },
+        columns:[
+            {"visible":false, data: "link_id"},
+            {data:'link_name'},
+            {data:'link_url'},
+            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑友链' style='color:gray'  class='btn btn-link edit-link' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除友链'  style='color:gray' class='btn btn-link del-link' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
+        ],
+        language: {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        }})
+    //删除
+    $(document).on('click', '.del-link', function(e){
+
+        //获取隐藏列的值
+        var rowIndex = $(this).parents("tr").index();  //行号
+        var id = table.row(rowIndex).data().link_id;
+        console.log(id);
+
+        if (confirm("确定要删除该友情链接吗？")) {
+            var jsonData = {
+                "link_id":id
+            }
             $.ajax({
                 type:'post',
-                url:'/b-admin/setNotice',
+                url:'/b-admin/delLink',
                 contentType:'application/json;charset=utf-8',//指定为json类型
                 //数据格式是json串，商品信息
                 data:JSON.stringify(jsonData),
                 success:function(data){//返回json结果
-                    alert(data.status);
+                    console.log(data.status)
+                    table.row(rowIndex).remove().draw();
                 }
             });
-        });
+        }
     });
+
 </script>
 </html>

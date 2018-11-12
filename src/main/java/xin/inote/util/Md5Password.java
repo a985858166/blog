@@ -19,8 +19,10 @@ public class Md5Password {
         int hashIterations = 2;
         ByteSource credentialsSalt = ByteSource.Util.bytes(user.getUser_salt());
         String PasswordDB= new SimpleHash(hashAlgorithmName, credentials, credentialsSalt, hashIterations).toString();
-        if (user.getUser_password().equals(PasswordDB))
+        if (user.getUser_password().equals(PasswordDB)){
             return true;
+        }
+
         return false;
     }
 }

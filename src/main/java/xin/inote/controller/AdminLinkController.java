@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("b-admin")
 public class AdminLinkController {
     @Autowired
     AdminLinkService adminLinkService;
@@ -24,7 +24,7 @@ public class AdminLinkController {
     @ResponseBody
     public Map linkData(){
         Map map = new HashMap();
-        map.put("link",adminLinkService.getLink());
+        map.put("link",adminLinkService.listLink());
         return map;
     }
     @RequestMapping(value = "/addLink")

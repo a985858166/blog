@@ -13,7 +13,7 @@ import xin.inote.util.Md5Password;
 import java.util.List;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("b-admin")
 public class AdminInformationController {
     @Autowired
     AdminInformationService adminInformationService;
@@ -48,7 +48,7 @@ public class AdminInformationController {
     @RequestMapping(value = "/setInformation",method = RequestMethod.POST)
     public String setInformation(String blogName,String blogDomain){
         adminInformationService.setInformation(blogName,blogDomain);
-        return "redirect:/admin/information";
+        return "redirect:/b-admin/information";
     }
     @RequestMapping(value = "/setAdmin",method = RequestMethod.POST)
     public String setAdmin(RedirectAttributes attr, String blogUserName, String blogNewPwd, String blogOldPwd){
@@ -65,6 +65,6 @@ public class AdminInformationController {
         }else {
             attr.addFlashAttribute("info","密码修改成功!");
         }
-        return "redirect:/admin/information";
+        return "redirect:/b-admin/information";
     }
 }

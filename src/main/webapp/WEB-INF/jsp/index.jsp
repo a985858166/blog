@@ -60,7 +60,7 @@
 
                                 <c:choose>
                                     <c:when test="${not empty subject.principals}">
-                                        <li><a href="/admin/information">后台管理</a></li>
+                                        <li><a href="/b-admin/information">后台管理</a></li>
                                         <li><a href="/doLogout">注销</a></li>
                                     </c:when>
                                     <c:otherwise>
