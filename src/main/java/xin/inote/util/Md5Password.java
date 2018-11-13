@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import xin.inote.mapper.UserMapper;
 import xin.inote.pojo.User;
 import xin.inote.pojo.UserExample;
+
 @Component
 public class Md5Password {
     @Autowired

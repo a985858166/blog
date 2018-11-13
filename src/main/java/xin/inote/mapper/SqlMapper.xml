@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xin.inote.mapper.SqlMapper">
+    <resultMap id="ArticleResultMap" type="xin.inote.pojo.Article">
+        <result column="article_id" jdbcType="INTEGER" property="article_id" />
+        <result column="article_user_id" jdbcType="INTEGER" property="article_user_id" />
+        <result column="article_classify_id" jdbcType="INTEGER" property="article_classify_id" />
+        <result column="article_title" jdbcType="VARCHAR" property="article_title" />
+        <result column="article_date" jdbcType="TIMESTAMP" property="article_date" />
+        <result column="article_content" jdbcType="VARCHAR" property="article_content" />
+        <result column="article_status" jdbcType="INTEGER" property="article_status" />
+        <result column="article_url" jdbcType="VARCHAR" property="article_url" />
+    </resultMap>
+    <resultMap id="Article" type="xin.inote.pojo.Article" extends="ArticleResultMap">
+        <association property="classify" javaType="Classify">
+            <result column="classify_name" jdbcType="VARCHAR" property="classify_name" />
+        </association>
+        <association property="user" javaType="User">
+            <result column="user_username" jdbcType="VARCHAR" property="user_username" />
+        </association>
+    </resultMap>
+    <select id="selectClassifyAll" resultMap="Article">
+        SELECT * FROM b_article a LEFT JOIN b_classify c ON a.article_classify_id = c.classify_id
+        LEFT JOIN b_user b ON a.article_user_id = b.user_id
+    </select>
+</mapper>

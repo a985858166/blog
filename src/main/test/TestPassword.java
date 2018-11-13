@@ -5,10 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import xin.inote.mapper.UserMapper;
-import xin.inote.pojo.User;
-import xin.inote.pojo.UserExample;
-import xin.inote.util.Md5Password;
+
 @RunWith(SpringJUnit4ClassRunner.class)//表示整合JUnit4进行测试
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class TestPassword {

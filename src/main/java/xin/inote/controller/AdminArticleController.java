@@ -11,6 +11,7 @@ import xin.inote.pojo.Article;
 import xin.inote.service.AdminArticleService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,6 +26,15 @@ public class AdminArticleController {
     @RequestMapping("/allArticle")
     public String allArticle(){
         return "/admin/allArticle";
+    }
+    @RequestMapping("/listArticle")
+    @ResponseBody
+    public Map listArticle(){
+        Map<String,Object> map = new HashMap<>();
+        List<Article> list = adminArticleService.listArticle();
+        map.put("listArticle",list);
+        map.put("status","ok");
+        return map;
     }
 
     @RequestMapping("/newArticle")

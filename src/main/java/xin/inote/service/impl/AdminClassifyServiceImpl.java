@@ -43,7 +43,7 @@ public class AdminClassifyServiceImpl implements AdminClassifyService {
     @Override
     public boolean delClassify(Classify classify) {
         ArticleExample articleExample = new ArticleExample();
-        articleExample.or().andArticle_classlfy_idEqualTo(classify.getClassify_id());
+        articleExample.or().andArticle_classify_idEqualTo(classify.getClassify_id());
         if (!articleMapper.selectByExample(articleExample).isEmpty()){
             return false;
         }

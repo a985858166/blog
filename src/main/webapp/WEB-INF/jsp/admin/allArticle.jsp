@@ -116,8 +116,10 @@
                             <tr>
                                 <th width="8%" class="min-mobile-l">文章id</th>
                                 <th width="8%" class="min-mobile-l">标题</th>
-                                <th width="10%" class="min-mobile-l">作者</th>
+                                <th width="8%" class="min-mobile-l">作者</th>
                                 <th width="8%" class="min-mobile-l">分类目录</th>
+                                <th width="8%" class="min-mobile-l">日期</th>
+                                <th width="8%" class="min-mobile-l">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -147,17 +149,28 @@
     var table;
     table = $("#table").DataTable({
         "ajax":{
-            "url":"/b-admin/linkData",
+            "url":"/b-admin/listArticle",
             "type":"post",
             "dataSrc":function (json) {
-                console.log(JSON.stringify(json['link']))
-                return json['link']
+                console.log(JSON.stringify(json['listArticle']))
+                return json['listArticle']
             }
         },
         columns:[
-            {"visible":false, data: "link_id"},
-            {data:'link_name'},
-            {data:'link_url'},
+            {"visible":false, data: "article_id"},
+            {data:"article_title"},
+            {data:"user.user_username"},
+            {data:"classify.classify_name"},
+            {data:function(obj){
+                    var time = new Date(obj.article_date);
+                    var y = time.getFullYear();//年
+                    var m = time.getMonth() + 1;//月
+                    var d = time.getDate();//日
+                    var h = time.getHours();//时
+                    var mm = time.getMinutes();//分
+                    var s = time.getSeconds();//秒
+                    return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+                }},
             {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑友链' style='color:gray'  class='btn btn-link edit-link' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除友链'  style='color:gray' class='btn btn-link del-link' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
         ],
         language: {
