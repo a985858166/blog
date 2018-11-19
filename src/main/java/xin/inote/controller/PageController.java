@@ -32,11 +32,7 @@ public class PageController {
     public String noPerms(){
         return "unatuthorized";
     }
-    @RequestMapping("test")
-    public String test(){
-        List<Article> list = sqlMapper.selectClassifyAll();
-        return "login";
-    }
+
 
 
 }

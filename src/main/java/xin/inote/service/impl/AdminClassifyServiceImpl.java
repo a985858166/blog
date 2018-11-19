@@ -32,6 +32,7 @@ public class AdminClassifyServiceImpl implements AdminClassifyService {
 
     @Override
     public boolean editClassify(Classify classify) {
+
         ClassifyExample example = new ClassifyExample();
         example.or().andClassify_idEqualTo(classify.getClassify_id());
         if (classifyMapper.updateByExampleSelective(classify,example)>0){

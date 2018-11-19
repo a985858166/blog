@@ -13,14 +13,14 @@ public class AdminNoticeServiceImpl implements AdminNoticeService {
     @Override
     public String getNotece() {
         OptionExample example = new OptionExample();
-        example.or().andOption_nameEqualTo("notece");
+        example.or().andOption_nameEqualTo("notice");
         return optionMapper.selectByExample(example).get(0).getOption_value();
     }
     @Override
     public boolean setNotice(String notice) {
         try {
             OptionExample example = new OptionExample();
-            example.or().andOption_nameEqualTo("notece");
+            example.or().andOption_nameEqualTo("notice");
             Option option = new Option();
             option.setOption_value(notice);
             optionMapper.updateByExampleSelective(option, example);

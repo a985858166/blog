@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import xin.inote.mapper.ArticleMapper;
 import xin.inote.mapper.SqlMapper;
 import xin.inote.pojo.Article;
+import xin.inote.pojo.ArticleExample;
 import xin.inote.pojo.User;
 import xin.inote.service.AdminArticleService;
 
@@ -36,5 +37,36 @@ public class AdminArticleServiceImpl implements AdminArticleService {
     @Override
     public List<Article> listArticle() {
         return sqlMapper.selectClassifyAll();
+    }
+
+    @Override
+    public boolean delArticle(Article article) {
+        ArticleExample example = new ArticleExample();
+        example.or().andArticle_idEqualTo(article.getArticle_id());
+        if (articleMapper.deleteByExample(example)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean editArticle(Article article) {
+        ArticleExample example = new ArticleExample();
+        example.or().andArticle_idEqualTo(article.getArticle_id());
+        if (articleMapper.updateByExampleSelective(article,example)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Article getArticle(int article_id) {
+        ArticleExample example = new ArticleExample();
+        example.or().andArticle_idEqualTo(article_id);
+        List<Article> list = articleMapper.selectByExampleWithBLOBs(example);
+        if (list.size()>0){
+            return list.get(0);
+        }
+        return null;
     }
 }

@@ -79,7 +79,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/b-admin/allArticle">所有文章</a></li>
-                        <li  class="active"><a href="./b-admin/write">写文章</a></li>
+                        <li><a href="/b-admin/write">写文章</a></li>
                         <li><a href="/b-admin/classify">文章分类</a></li>
                     </ul>
                 </li>
@@ -98,7 +98,7 @@
     <div id='home' class="content-wrapper">
         <section class="content-header">
             <h1>
-                写文章
+                编辑文章
                 <!--<small>Optional description</small>-->
             </h1>
             <!-- <ol class="breadcrumb">
@@ -124,7 +124,7 @@
             </select>
             <span style="float: right;">
 
-        <button type="button" class="release btn btn-primary btn-lg" id="release" data-status="1">发布</button>
+        <button type="button" class="release btn btn-primary btn-lg" id="release" data-status="1">更新</button>
         &nbsp;&nbsp;
         <button type="button" class="release btn btn-primary btn-lg" id="draft" data-status="2">草稿</button>
             </span>
@@ -145,30 +145,11 @@
 <script type="text/javascript" src="../wangEditor/wangEditor.min.js"></script>
 <script type="text/javascript">
     var listClasify;
+    var article;
     var E = window.wangEditor;
     var editor = new E('#editor');
     editor.create();
-    //发布文章
-    $(function () {
-        $(".release").click(function (e) {
-            var article_status = $(this).data("status");
-            var article_title = $("#article_title").val();
-            var article_classify_id = listClasify[$("#selectClassify").val()]["classify_id"];
-            var jsonData = {"article_content": editor.txt.html(),"article_title":article_title,
-            "article_classify_id":article_classify_id,"article_status":article_status};
-            alert(JSON.stringify(jsonData));
-            $.ajax({
-                type: 'post',
-                url: '/b-admin/newArticle',
-                contentType: 'application/json;charset=utf-8',//指定为json类型
-                //数据格式是json串，商品信息
-                data: JSON.stringify(jsonData),
-                success: function (data) {//返回json结果
-                    alert(data.status);
-                }
-            });
-        });
-    });
+    //获取分类
     $(function () {
         $.ajax({
             type: 'post',
@@ -177,10 +158,48 @@
             success: function (data) {//返回json结果
                 listClasify = data.classify;
                 for (var i = 0; i < listClasify.length; i++) {
-                    $("#selectClassify").append("<option value="+i+">"+listClasify[i]['classify_name']+"</option>");
+                    $("#selectClassify").append("<option value="+listClasify[i]['classify_id']+">"+listClasify[i]['classify_name']+"</option>");
                 }
+
             }
         });
     });
+    //获取文章
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '/b-admin/getArticle',
+            contentType: 'application/json;charset=utf-8',//指定为json类型
+            //数据格式是json串，商品信息
+            success: function (data) {//返回json结果
+                article = data.article;
+                $("#article_title").val(article.article_title);
+                editor.txt.html(article.article_content)
+                $("#selectClassify").val(article.article_classify_id);
+            }
+        });
+    });
+    //发布文章
+    $(function () {
+        $(".release").click(function (e) {
+            var article_status = $(this).data("status");
+            var article_title = $("#article_title").val();
+            var article_classify_id = $("#selectClassify").val();
+            article.article_content = editor.txt.html();
+            article.article_title = article_title;
+            article.article_classify_id = article_classify_id;
+            article.article_status = article_status;
+            $.ajax({
+                type: 'post',
+                url: '/b-admin/editArticle',
+                contentType: 'application/json;charset=utf-8',//指定为json类型
+                data: JSON.stringify(article),
+                success: function (data) {//返回json结果
+                    alert(data.status);
+                }
+            });
+        });
+    });
+
 </script>
 </html>

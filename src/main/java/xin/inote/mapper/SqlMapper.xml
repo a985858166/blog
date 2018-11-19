@@ -7,7 +7,7 @@
         <result column="article_classify_id" jdbcType="INTEGER" property="article_classify_id" />
         <result column="article_title" jdbcType="VARCHAR" property="article_title" />
         <result column="article_date" jdbcType="TIMESTAMP" property="article_date" />
-        <result column="article_content" jdbcType="VARCHAR" property="article_content" />
+        <!--<result column="article_content" jdbcType="VARCHAR" property="article_content" />-->
         <result column="article_status" jdbcType="INTEGER" property="article_status" />
         <result column="article_url" jdbcType="VARCHAR" property="article_url" />
     </resultMap>

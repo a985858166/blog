@@ -171,7 +171,7 @@
                     var s = time.getSeconds();//秒
                     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
                 }},
-            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑友链' style='color:gray'  class='btn btn-link edit-link' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除友链'  style='color:gray' class='btn btn-link del-link' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
+            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑文章' style='color:gray'  class='btn btn-link edit-article' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除文章'  style='color:gray' class='btn btn-link del-article' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
         ],
         language: {
             "sProcessing": "处理中...",
@@ -198,20 +198,20 @@
             }
         }})
     //删除
-    $(document).on('click', '.del-link', function(e){
+    $(document).on('click', '.del-article', function(e){
 
         //获取隐藏列的值
         var rowIndex = $(this).parents("tr").index();  //行号
-        var id = table.row(rowIndex).data().link_id;
+        var id = table.row(rowIndex).data().article_id;
         console.log(id);
 
-        if (confirm("确定要删除该友情链接吗？")) {
+        if (confirm("确定要删除该文章吗")) {
             var jsonData = {
-                "link_id":id
+                "article_id":id
             }
             $.ajax({
                 type:'post',
-                url:'/b-admin/delLink',
+                url:'/b-admin/delArticle',
                 contentType:'application/json;charset=utf-8',//指定为json类型
                 //数据格式是json串，商品信息
                 data:JSON.stringify(jsonData),
@@ -221,6 +221,17 @@
                 }
             });
         }
+    });
+    //编辑
+    $(document).on('click', '.edit-article', function(e){
+
+        //获取隐藏列的值
+        var rowIndex = $(this).parents("tr").index();  //行号
+        var id = table.row(rowIndex).data().article_id;
+        console.log(id);
+        window.location.href='editWrite?article_id='+id;
+
+
     });
 
 </script>

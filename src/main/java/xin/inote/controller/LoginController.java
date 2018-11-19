@@ -10,7 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import xin.inote.service.UserService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("")
@@ -33,6 +37,19 @@ public class LoginController {
             model.addAttribute("error","验证失败");
             return "login";
         }
+    }
+    @RequestMapping("/status")
+    @ResponseBody
+    public Map status(){
+        Map<String,Object> map = new HashMap();
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.getPrincipal() != null){
+            map.put("ul","<li><a href='b-admin/information'>后台管理</a></li>" +
+                    "<li><a href='doLogout'>注销</a></li>");
+        }else {
+            map.put("ul","<li><a href='login'>登录</a></li>");
+        }
+        return map;
     }
 
 }
