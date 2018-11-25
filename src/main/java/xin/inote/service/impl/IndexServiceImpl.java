@@ -37,7 +37,7 @@ public class IndexServiceImpl implements IndexService {
         }else {
             pageNum = 1;
         }
-        PageHelper.startPage(pageNum, 2);
+        PageHelper.startPage(pageNum, 5);
         List<Article> list = articleMapper.selectByExampleWithBLOBs(new ArticleExample());
         for (int i = 0; i < list.size(); i++) {
             Reader in=new StringReader(list.get(i).getArticle_content());

@@ -17,8 +17,10 @@
   <link rel="stylesheet" href="/css/skin/_all-skins.min.css">
   <link rel="stylesheet" href="/css/skin/skin-black.min.css">
   <link rel="stylesheet" href="/css/dataTables.bootstrap.min.css" />
+  <link rel="stylesheet" href="/wangEditor/wangEditor.css"/>
   <link rel="stylesheet" href="/css/menu.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="/css/article.css" />
+  <%--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">--%>
   
 
 </head>
@@ -69,16 +71,60 @@
               <div class="row" style="margin-top:15px">
                   <!-- 左边主体 -->
                   <div class="col-md-8">
-                      <div id="articeList"></div>
-                      <ul class="pagination" id="paging">
-                          <%--<li><a href="#">&laquo;</a></li>--%>
-                          <%--<li><a href="#">1</a></li>--%>
-                          <%--<li><a href="#">2</a></li>--%>
-                          <%--<li><a href="#">3</a></li>--%>
-                          <%--<li><a href="#">4</a></li>--%>
-                          <%--<li><a href="#">5</a></li>--%>
-                          <%--<li><a href="#">&raquo;</a></li>--%>
-                      </ul>
+                      <div class="panel panel-default">
+                          <div class="panel-body">
+                              <div class="panel panel-info">
+                                  <div class="panel-heading">
+                                      <span class="panel-title" id="article_title"><span class="pull-right">发帖时间：2018-03-21 ◊ 访问量：105</span></span>
+                                  </div>
+                                  <div class="panel-body clearfix"><!-- clearfix清除浮动、pull-left左浮动、pull-right右浮动 -->
+                                      <p class="lead">
+                                          <small>UpDate：2018-07-21 16:34</small><br>
+                                          <small>Author: TabKey9 点赞：0  <span>评论：0 </span></small>
+                                      </p><hr>
+                                      <div id="article_content" style="overflow:hidden;">
+                                      </div>
+                                  </div>
+                              </div>
+                              <%--评论开始--%>
+                              <div class="page-header">
+                                  <h3>评论</h3>
+                              </div>
+                              <div class="panel plane-default">
+                                  <div class="panel-body">
+                                      <form action="">
+                                          <div class="form-group">
+                                              <label class="sr-only"></label>
+                                              <input type="text" class="form-control" placeholder="您的名称（必填）">
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="sr-only"></label>
+                                              <input type="email" class="form-control" placeholder="邮箱(非必填)">
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="sr-only"></label>
+                                              <input type="text" class="form-control" placeholder="个人网站(非必填)">
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="sr-only"></label>
+                                              <textarea class="form-control" placeholder="你的评论（必填）" rows="3"></textarea>
+                                          </div>
+                                          <button type="submit" class="btn btn-primary">评论</button>
+                                      </form>
+                                  </div>
+                              </div>
+                              <div class="page-header">
+                                  <h4>admin<small>(2018-10-2 12:30:23)</small></h4>
+                                  <p>支持！支持</p>
+                              </div>
+                              <div class="page-header">
+                                  <h4>admin<small>(2018-10-2 12:30:23)</small></h4>
+                                  <p>支持！支持</p>
+                              </div>
+                              <%--评论结束--%>
+                          </div>
+                      </div>
+
                   </div>
                   <!-- 右边信息 -->
                   <div class="col-md-3 col-md-offset-1 visible-md-block visible-lg-block">
@@ -113,6 +159,8 @@
 <script src="/js/adminlte.min.js"></script>
 <script type="text/javascript" src="/js/jquery.dataTables.min.js" ></script>
 <script type="text/javascript" src="/js/dataTables.bootstrap.min.js" ></script>
-<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/wangEditor/wangEditor.js"></script>
 <script type="text/javascript" src="/js/status.js"></script>
+<script type="text/javascript" src="/js/article.js"></script>
+
 </html>

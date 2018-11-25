@@ -22,7 +22,6 @@ public class PageController {
     public String index(@PathVariable(required = false) String number){
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
-        session.setAttribute("subject",subject);
         if (number != null){
             session.setAttribute("pageNumber",number);
         }

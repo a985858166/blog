@@ -156,7 +156,6 @@
             var article_classify_id = listClasify[$("#selectClassify").val()]["classify_id"];
             var jsonData = {"article_content": editor.txt.html(),"article_title":article_title,
             "article_classify_id":article_classify_id,"article_status":article_status};
-            alert(JSON.stringify(jsonData));
             $.ajax({
                 type: 'post',
                 url: '/b-admin/newArticle',
@@ -164,7 +163,7 @@
                 //数据格式是json串，商品信息
                 data: JSON.stringify(jsonData),
                 success: function (data) {//返回json结果
-                    alert(data.status);
+                    console.log(data.status);
                 }
             });
         });

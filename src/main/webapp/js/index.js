@@ -1,23 +1,4 @@
-$(function () {
-    $.ajax({
-        type:"post",
-        url:"/status",
-        contentType:'application/json;charset=utf-8',
-        success:function(data){//返回json结果
-            $("#login").html(data.ul)
-        }
-    })
-})
-$(function () {
-    $.ajax({
-        type:"post",
-        url:"/notice",
-        contentType:'application/json;charset=utf-8',
-        success:function(data){//返回json结果
-            $("#notice").html(data.notice)
-        }
-    })
-})
+
 $(function () {
     $.ajax({
         type:"post",
@@ -56,12 +37,26 @@ $(function () {
             }
             var pages = data.pages;
             var pageNum = data.pageNum;
+            if (pageNum != 1){
+                $("#paging").append("<li><a href='/page/"+1+"'>首页</a></li>");
+            }else {
+                $("#paging").append("<li class='disabled'><a href='#'>首页</a></li>");
+            }
             if (pageNum > 1){
                 $("#paging").append("<li><a href='/page/"+(pageNum-1)+"'>上一页</a></li>");
             }else {
                 $("#paging").append("<li class='disabled'><a href='#'>上一页</a></li>");
             }
-            for (var i = 1; i <= pages; i++) {
+            var i = 1;
+            var endPage = pages;
+            if (pageNum>3){
+                $("#paging").append("<li class='disabled'><a href='#'>...</a></li>");
+                i = pageNum-3;
+            }
+            if (pageNum+3<pages){
+                endPage = pageNum+3;
+            }
+            for (i; i <= endPage; i++) {
                 if (i==pageNum) {
                     $("#paging").append("<li class='active'><a href='/page/"+i+"'>"+i+"</a></li>");
                 }else {
@@ -69,10 +64,18 @@ $(function () {
                 }
 
             }
+            if (pageNum+3<pages){
+                $("#paging").append("<li class='disabled'><a href='#'>...</a></li>");
+            }
             if (pageNum < pages){
                 $("#paging").append("<li><a href='/page/"+(pageNum+1)+"'>下一页</a></li>");
             }else {
                 $("#paging").append("<li class='disabled'><a href='#'>下一页</a></li>");
+            }
+            if (pageNum != pages){
+                $("#paging").append("<li><a href='/page/"+pages+"'>尾页</a></li>");
+            }else {
+                $("#paging").append("<li class='disabled'><a href='#'>尾页</a></li>");
             }
         }
     })
