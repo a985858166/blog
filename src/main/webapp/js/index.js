@@ -11,7 +11,7 @@ $(function () {
                 $("#articeList").append("<div class=\"bs-example\" data-example-id=\"contextual-panels\">\n" +
                     "                          <div class=\"panel panel-info\">\n" +
                     "                              <div class=\"panel-heading\">\n" +
-                    "                                  <h3 class=\"panel-title\">"+articeList[i].article_title+"</h3>\n" +
+                    "                                  <h3 class=\"panel-title\"><a href='/article/"+articeList[i].article_id+"'>"+articeList[i].article_title+"</a></h3>\n" +
                     "                              </div>\n" +
                     "                              <div class=\"panel-body\">"+articeList[i].article_content+"</div>\n" +
                     "                              <div class=\"panel-footer\">\n" +
@@ -37,13 +37,17 @@ $(function () {
             }
             var pages = data.pages;
             var pageNum = data.pageNum;
+            var pagePathOne = "/page/";
+            if (data.classify_status == "ok"){
+                pagePathOne = "/classify/"+data.classify_id+"/page/"
+            }
             if (pageNum != 1){
-                $("#paging").append("<li><a href='/page/"+1+"'>首页</a></li>");
+                $("#paging").append("<li><a href='"+pagePathOne+1+"'>首页</a></li>");
             }else {
                 $("#paging").append("<li class='disabled'><a href='#'>首页</a></li>");
             }
             if (pageNum > 1){
-                $("#paging").append("<li><a href='/page/"+(pageNum-1)+"'>上一页</a></li>");
+                $("#paging").append("<li><a href='"+pagePathOne+(pageNum-1)+"'>上一页</a></li>");
             }else {
                 $("#paging").append("<li class='disabled'><a href='#'>上一页</a></li>");
             }
@@ -58,9 +62,9 @@ $(function () {
             }
             for (i; i <= endPage; i++) {
                 if (i==pageNum) {
-                    $("#paging").append("<li class='active'><a href='/page/"+i+"'>"+i+"</a></li>");
+                    $("#paging").append("<li class='active'><a href='"+pagePathOne+i+"'>"+i+"</a></li>");
                 }else {
-                    $("#paging").append("<li><a href='/page/"+i+"'>"+i+"</a></li>");
+                    $("#paging").append("<li><a href='"+pagePathOne+i+"'>"+i+"</a></li>");
                 }
 
             }
@@ -68,12 +72,12 @@ $(function () {
                 $("#paging").append("<li class='disabled'><a href='#'>...</a></li>");
             }
             if (pageNum < pages){
-                $("#paging").append("<li><a href='/page/"+(pageNum+1)+"'>下一页</a></li>");
+                $("#paging").append("<li><a href='"+pagePathOne+(pageNum+1)+"'>下一页</a></li>");
             }else {
                 $("#paging").append("<li class='disabled'><a href='#'>下一页</a></li>");
             }
-            if (pageNum != pages){
-                $("#paging").append("<li><a href='/page/"+pages+"'>尾页</a></li>");
+            if (pageNum < pages){
+                $("#paging").append("<li><a href='"+pagePathOne+pages+"'>尾页</a></li>");
             }else {
                 $("#paging").append("<li class='disabled'><a href='#'>尾页</a></li>");
             }

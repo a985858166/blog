@@ -40,7 +40,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>博客</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -79,11 +79,11 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/b-admin/allArticle">所有文章</a></li>
-                        <li  class="active"><a href="./b-admin/write">写文章</a></li>
+                        <li  class="active"><a href="/b-admin/write">写文章</a></li>
                         <li><a href="/b-admin/classify">文章分类</a></li>
                     </ul>
                 </li>
-                <li><a href="./评论管理.html"><i class="fa fa-fw fa-comments"></i> <span>评论</span></a></li>
+                <li><a href="/b-admin/comment"><i class="fa fa-fw fa-comments"></i> <span>评论</span></a></li>
                 <li><a href="/b-admin/link"><i class="fa fa-link"></i> <span>友情链接</span></a></li>
                 <li><a href="/b-admin/notice"><i class="fa fa-fw fa-calendar-minus-o"></i><span>公告</span></a>
                 </li>

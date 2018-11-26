@@ -32,17 +32,17 @@
           <nav class="navbar navbar-static-top">
               <div class="container">
                   <div class="navbar-header">
-                      <a href="#" class="navbar-brand"><b>博客</b></a>
+                      <a href="/" class="navbar-brand"><b>博客</b></a>
                       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                           <i class="fa fa-bars"></i>
                       </button>
                   </div>
                   <div class="collapse navbar-collapse" id="navbar-collapse">
-                      <ul class="nav navbar-nav">
-                          <li><a href="#">实用教程 <span class="sr-only">(current)</span></a></li>
-                          <li><a href="#">编程技术</a></li>
-                          <li><a href="#">系统运维</a></li>
-                          <li><a href="#">资源分享</a></li>
+                      <ul class="nav navbar-nav" id="classify_ul">
+                          <%--<li><a href="#">实用教程 <span class="sr-only">(current)</span></a></li>--%>
+                          <%--<li><a href="#">编程技术</a></li>--%>
+                          <%--<li><a href="#">系统运维</a></li>--%>
+                          <%--<li><a href="#">资源分享</a></li>--%>
                       </ul>
                       <form action="#" method="get" class=" navbar-form navbar-left">
                           <div class="input-group">
@@ -95,31 +95,26 @@
                                       <form action="">
                                           <div class="form-group">
                                               <label class="sr-only"></label>
-                                              <input type="text" class="form-control" placeholder="您的名称（必填）">
+                                              <input type="text" id="comment_name" class="form-control" placeholder="您的名称（必填）">
                                           </div>
                                           <div class="form-group">
                                               <label class="sr-only"></label>
-                                              <input type="email" class="form-control" placeholder="邮箱(非必填)">
+                                              <input type="email" id="comment_email" class="form-control" placeholder="邮箱(必填)">
                                           </div>
                                           <div class="form-group">
                                               <label class="sr-only"></label>
-                                              <input type="text" class="form-control" placeholder="个人网站(非必填)">
+                                              <input type="text" id="comment_url" class="form-control" placeholder="个人网站(非必填)">
                                           </div>
                                           <div class="form-group">
                                               <label class="sr-only"></label>
-                                              <textarea class="form-control" placeholder="你的评论（必填）" rows="3"></textarea>
+                                              <textarea id="comment_content" class="form-control" placeholder="你的评论（必填）" rows="3"></textarea>
                                           </div>
-                                          <button type="submit" class="btn btn-primary">评论</button>
+                                          <button id="comment_submit" type="button" class="btn btn-primary">评论</button>
                                       </form>
                                   </div>
                               </div>
-                              <div class="page-header">
-                                  <h4>admin<small>(2018-10-2 12:30:23)</small></h4>
-                                  <p>支持！支持</p>
-                              </div>
-                              <div class="page-header">
-                                  <h4>admin<small>(2018-10-2 12:30:23)</small></h4>
-                                  <p>支持！支持</p>
+                              <div id="list_comment">
+
                               </div>
                               <%--评论结束--%>
                           </div>
@@ -130,7 +125,7 @@
                   <div class="col-md-3 col-md-offset-1 visible-md-block visible-lg-block">
                       <div class="panel panel-primary">
                           <div class="panel-heading">公告</div>
-                          <div class="panel-body" id="notice">
+                          <div class="panel-body" style="overflow:hidden;" id="notice">
                               公告为空
                           </div>
                       </div>

@@ -18,12 +18,19 @@ import java.util.List;
 public class PageController {
     @Autowired
     SqlMapper sqlMapper;
-    @RequestMapping({"index","/","/page/{number:\\d+}"})
-    public String index(@PathVariable(required = false) String number){
+    @RequestMapping({"index","/","/page/{number:\\d+}","/classify/{classify_id:\\d+}","/classify/{classify_id:\\d+}/page/{number:\\d+}"})
+    public String index(@PathVariable(required = false) String number,@PathVariable(required = false) String classify_id){
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         if (number != null){
             session.setAttribute("pageNumber",number);
+        }else {
+            session.removeAttribute("pageNumber");
+        }
+        if (classify_id != null){
+            session.setAttribute("classify_id",classify_id);
+        }else {
+            session.removeAttribute("classify_id");
         }
         return "index";
     }

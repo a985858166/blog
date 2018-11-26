@@ -7,6 +7,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xin.inote.mapper.ArticleMapper;
+import xin.inote.mapper.ClassifyMapper;
 import xin.inote.mapper.OptionMapper;
 import xin.inote.mapper.UserMapper;
 import xin.inote.pojo.*;
@@ -26,7 +27,17 @@ public class IndexServiceImpl implements IndexService {
     @Autowired
     UserMapper userMapper;
     @Autowired
+    ClassifyMapper classifyMapper;
+    @Autowired
     Html2Text html2Text;
+
+    @Override
+    public List<Classify> classifyList() {
+        ClassifyExample example = new ClassifyExample();
+        example.setOrderByClause("classify_top asc");
+        return classifyMapper.selectByExample(example);
+    }
+
     @Override
     public List<Article> showArticleList() throws IOException {
         Subject subject = SecurityUtils.getSubject();
@@ -38,7 +49,11 @@ public class IndexServiceImpl implements IndexService {
             pageNum = 1;
         }
         PageHelper.startPage(pageNum, 5);
-        List<Article> list = articleMapper.selectByExampleWithBLOBs(new ArticleExample());
+        ArticleExample articleExample = new ArticleExample();
+        if (session.getAttribute("classify_id") != null){
+            articleExample.or().andArticle_classify_idEqualTo(Integer.parseInt(session.getAttribute("classify_id").toString()));
+        }
+        List<Article> list = articleMapper.selectByExampleWithBLOBs(articleExample);
         for (int i = 0; i < list.size(); i++) {
             Reader in=new StringReader(list.get(i).getArticle_content());
             html2Text.parse(in);

@@ -44,7 +44,7 @@ public class LoginController {
         Map<String,Object> map = new HashMap();
         Subject subject = SecurityUtils.getSubject();
         if (subject.getPrincipal() != null){
-            map.put("ul","<li><a href='b-admin/information'>后台管理</a></li>" +
+            map.put("ul","<li><a href='/b-admin/information'>后台管理</a></li>" +
                     "<li><a href='/doLogout'>注销</a></li>");
         }else {
             map.put("ul","<li><a href='/login'>登录</a></li>");

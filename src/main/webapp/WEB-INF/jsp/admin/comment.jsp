@@ -71,19 +71,19 @@
                 <li class="header">菜单</li>
                 <!-- Optionally, you can add icons to the links -->
                 <!-- <li class="active"><a href="home.html"><i class="fa fa-link"></i> <span>博客信息</span></a></li> -->
-                <li class="treeview active">
+                <li class="treeview">
                   <a href="#"><i class="fa fa-fw fa-book"></i> <span>文章</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li class="active"><a href="/b-admin/allArticle">所有文章</a></li>
+                    <li><a href="/b-admin/allArticle">所有文章</a></li>
                     <li><a href="/b-admin/write">写文章</a></li>
                     <li><a href="/b-admin/classify">文章分类</a></li>
                   </ul>
                 </li>
-                <li><a href="/b-admin/comment"><i class="fa fa-fw fa-comments"></i> <span>评论</span></a></li>
+                <li class="active"><a href="/b-admin/comment"><i class="fa fa-fw fa-comments"></i> <span>评论</span></a></li>
                 <li><a href="/b-admin/link"><i class="fa fa-link"></i> <span>友情链接</span></a></li>
                 <li><a href="/b-admin/notice"><i class="fa fa-fw fa-calendar-minus-o"></i><span>公告</span></a></li>
                 <li><a href="/b-admin/information"><i class="fa fa-fw fa-gear"></i><span>博客信息</span></a></li>
@@ -102,7 +102,7 @@
         <section class="content">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">文章管理</h3>
+                    <h3 class="box-title">评论管理</h3>
 
                     <div class="box-tools">
 
@@ -114,11 +114,13 @@
                         <table class="table table-striped table-bordered responsive table-hover" id="table" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th width="8%" class="min-mobile-l">文章id</th>
-                                <th width="8%" class="min-mobile-l">标题</th>
+                                <th width="8%" class="min-mobile-l">id</th>
                                 <th width="8%" class="min-mobile-l">作者</th>
-                                <th width="8%" class="min-mobile-l">分类目录</th>
-                                <th width="8%" class="min-mobile-l">日期</th>
+                                <th width="10%" class="min-mobile-l">评论</th>
+                                <th width="8%" class="min-mobile-l">邮箱</th>
+                                <th width="8%" class="min-mobile-l">网址</th>
+                                <th width="8%" class="min-mobile-l">原文章</th>
+                                <th width="8%" class="min-mobile-l">提交于</th>
                                 <th width="8%" class="min-mobile-l">操作</th>
                             </tr>
                             </thead>
@@ -131,6 +133,8 @@
           
         </section>
 
+
+      </div>
     </div>
     <!-- ./wrapper -->
 
@@ -149,29 +153,39 @@
     var table;
     table = $("#table").DataTable({
         "ajax":{
-            "url":"/b-admin/listArticle",
+            "url":"/b-admin/listComment",
             "type":"post",
-            "dataSrc":function (json) {
-                console.log(JSON.stringify(json['listArticle']))
-                return json['listArticle']
-            }
-        },
-        columns:[
-            {"visible":false, data: "article_id"},
-            {data:"article_title"},
-            {data:"user.user_username"},
-            {data:"classify.classify_name"},
-            {data:function(obj){
-                    var time = new Date(obj.article_date);
+            "dataSrc":function (data) {
+                function getDate(obj) {
+                    var time = new Date(obj);
                     var y = time.getFullYear();//年
                     var m = time.getMonth() + 1;//月
                     var d = time.getDate();//日
                     var h = time.getHours();//时
                     var mm = time.getMinutes();//分
                     var s = time.getSeconds();//秒
+                    // return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
                     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
-                }},
-            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑文章' style='color:gray'  class='btn btn-link edit-article' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除文章'  style='color:gray' class='btn btn-link del-article' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
+                }
+                console.log(data.articleList);
+                console.log(data.commentList);
+                for (let i = 0; i < data.commentList.length; i++) {
+                    data.commentList[i].article_title = data.articleList[i].article_title;
+                    data.commentList[i].comment_author_date = getDate(data.commentList[i].comment_author_date);
+                    data.commentList[i].article_title = "<a href='/article/"+data.commentList[i].comment_article_id+"'>"+data.commentList[i].article_title+"</a>"
+                }
+                return data.commentList;
+            }
+        },
+        columns:[
+            {"visible":false, data: "comment_id"},
+            {data:'comment_author_name'},
+            {data:'comment_author_content'},
+            {data:'comment_author_email'},
+            {data:'comment_author_url'},
+            {data:'article_title'},
+            {data:'comment_author_date'},
+            {data:null,"defaultContent":"</button><button title='删除友链'  style='color:gray' class='btn btn-link del-comment' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
         ],
         language: {
             "sProcessing": "处理中...",
@@ -198,20 +212,20 @@
             }
         }})
     //删除
-    $(document).on('click', '.del-article', function(e){
+    $(document).on('click', '.del-comment', function(e){
 
         //获取隐藏列的值
         var rowIndex = $(this).parents("tr").index();  //行号
-        var id = table.row(rowIndex).data().article_id;
+        var id = table.row(rowIndex).data().comment_id;
         console.log(id);
 
-        if (confirm("确定要删除该文章吗")) {
+        if (confirm("确定要删除该友情链接吗？")) {
             var jsonData = {
-                "article_id":id
+                "comment_id":id
             }
             $.ajax({
                 type:'post',
-                url:'/b-admin/delArticle',
+                url:'/b-admin/delComment',
                 contentType:'application/json;charset=utf-8',//指定为json类型
                 //数据格式是json串，商品信息
                 data:JSON.stringify(jsonData),
@@ -221,17 +235,6 @@
                 }
             });
         }
-    });
-    //编辑
-    $(document).on('click', '.edit-article', function(e){
-
-        //获取隐藏列的值
-        var rowIndex = $(this).parents("tr").index();  //行号
-        var id = table.row(rowIndex).data().article_id;
-        console.log(id);
-        window.location.href='editWrite?article_id='+id;
-
-
     });
 
 </script>

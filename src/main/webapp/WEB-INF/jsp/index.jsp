@@ -30,17 +30,17 @@
           <nav class="navbar navbar-static-top">
               <div class="container">
                   <div class="navbar-header">
-                      <a href="#" class="navbar-brand"><b>博客</b></a>
+                      <a href="/" class="navbar-brand"><b>博客</b></a>
                       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                           <i class="fa fa-bars"></i>
                       </button>
                   </div>
                   <div class="collapse navbar-collapse" id="navbar-collapse">
-                      <ul class="nav navbar-nav">
-                          <li><a href="#">实用教程 <span class="sr-only">(current)</span></a></li>
-                          <li><a href="#">编程技术</a></li>
-                          <li><a href="#">系统运维</a></li>
-                          <li><a href="#">资源分享</a></li>
+                      <ul class="nav navbar-nav" id="classify_ul">
+                          <%--<li><a href="#">实用教程 <span class="sr-only">(current)</span></a></li>--%>
+                          <%--<li><a href="#">编程技术</a></li>--%>
+                          <%--<li><a href="#">系统运维</a></li>--%>
+                          <%--<li><a href="#">资源分享</a></li>--%>
                       </ul>
                       <form action="#" method="get" class=" navbar-form navbar-left">
                           <div class="input-group">
@@ -69,6 +69,7 @@
               <div class="row" style="margin-top:15px">
                   <!-- 左边主体 -->
                   <div class="col-md-8">
+                      <div id="classify_info"></div>
                       <div id="articeList"></div>
                       <ul class="pagination" id="paging">
                           <%--<li><a href="#">&laquo;</a></li>--%>
@@ -84,7 +85,7 @@
                   <div class="col-md-3 col-md-offset-1 visible-md-block visible-lg-block">
                       <div class="panel panel-primary">
                           <div class="panel-heading">公告</div>
-                          <div class="panel-body" id="notice">
+                          <div class="panel-body" style="overflow:hidden;" id="notice">
                               公告为空
                           </div>
                       </div>
