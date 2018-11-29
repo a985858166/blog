@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xin.inote.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="xin.inote.pojo.Article">
+    <result column="article_id" jdbcType="INTEGER" property="article_id" />
+    <result column="article_user_id" jdbcType="INTEGER" property="article_user_id" />
+    <result column="article_classify_id" jdbcType="INTEGER" property="article_classify_id" />
+    <result column="article_title" jdbcType="VARCHAR" property="article_title" />
+    <result column="article_date" jdbcType="TIMESTAMP" property="article_date" />
+    <result column="article_status" jdbcType="INTEGER" property="article_status" />
+    <result column="article_url" jdbcType="VARCHAR" property="article_url" />
+    <result column="visitors" jdbcType="INTEGER" property="visitors" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="xin.inote.pojo.Article">
+    <result column="article_content" jdbcType="LONGVARCHAR" property="article_content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    article_id, article_user_id, article_classify_id, article_title, article_date, article_status, 
+    article_url, visitors
+  </sql>
+  <sql id="Blob_Column_List">
+    article_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="xin.inote.pojo.ArticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="xin.inote.pojo.ArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="xin.inote.pojo.ArticleExample">
+    delete from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="xin.inote.pojo.Article">
+    insert into b_article (article_id, article_user_id, article_classify_id, 
+      article_title, article_date, article_status, 
+      article_url, visitors, article_content
+      )
+    values (#{article_id,jdbcType=INTEGER}, #{article_user_id,jdbcType=INTEGER}, #{article_classify_id,jdbcType=INTEGER}, 
+      #{article_title,jdbcType=VARCHAR}, #{article_date,jdbcType=TIMESTAMP}, #{article_status,jdbcType=INTEGER}, 
+      #{article_url,jdbcType=VARCHAR}, #{visitors,jdbcType=INTEGER}, #{article_content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertReturnId" useGeneratedKeys="true" keyProperty="article_id" parameterType="xin.inote.pojo.Article">
+    insert into b_article (article_id, article_user_id, article_classify_id,
+                           article_title, article_date, article_status,
+                           article_url, visitors, article_content
+    )
+    values (#{article_id,jdbcType=INTEGER}, #{article_user_id,jdbcType=INTEGER}, #{article_classify_id,jdbcType=INTEGER},
+            #{article_title,jdbcType=VARCHAR}, #{article_date,jdbcType=TIMESTAMP}, #{article_status,jdbcType=INTEGER},
+            #{article_url,jdbcType=VARCHAR}, #{visitors,jdbcType=INTEGER}, #{article_content,jdbcType=LONGVARCHAR}
+           )
+  </insert>
+  <insert id="insertSelective" parameterType="xin.inote.pojo.Article">
+    insert into b_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="article_id != null">
+        article_id,
+      </if>
+      <if test="article_user_id != null">
+        article_user_id,
+      </if>
+      <if test="article_classify_id != null">
+        article_classify_id,
+      </if>
+      <if test="article_title != null">
+        article_title,
+      </if>
+      <if test="article_date != null">
+        article_date,
+      </if>
+      <if test="article_status != null">
+        article_status,
+      </if>
+      <if test="article_url != null">
+        article_url,
+      </if>
+      <if test="visitors != null">
+        visitors,
+      </if>
+      <if test="article_content != null">
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="article_id != null">
+        #{article_id,jdbcType=INTEGER},
+      </if>
+      <if test="article_user_id != null">
+        #{article_user_id,jdbcType=INTEGER},
+      </if>
+      <if test="article_classify_id != null">
+        #{article_classify_id,jdbcType=INTEGER},
+      </if>
+      <if test="article_title != null">
+        #{article_title,jdbcType=VARCHAR},
+      </if>
+      <if test="article_date != null">
+        #{article_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="article_status != null">
+        #{article_status,jdbcType=INTEGER},
+      </if>
+      <if test="article_url != null">
+        #{article_url,jdbcType=VARCHAR},
+      </if>
+      <if test="visitors != null">
+        #{visitors,jdbcType=INTEGER},
+      </if>
+      <if test="article_content != null">
+        #{article_content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="xin.inote.pojo.ArticleExample" resultType="java.lang.Long">
+    select count(*) from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update b_article
+    <set>
+      <if test="record.article_id != null">
+        article_id = #{record.article_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.article_user_id != null">
+        article_user_id = #{record.article_user_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.article_classify_id != null">
+        article_classify_id = #{record.article_classify_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.article_title != null">
+        article_title = #{record.article_title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.article_date != null">
+        article_date = #{record.article_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.article_status != null">
+        article_status = #{record.article_status,jdbcType=INTEGER},
+      </if>
+      <if test="record.article_url != null">
+        article_url = #{record.article_url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitors != null">
+        visitors = #{record.visitors,jdbcType=INTEGER},
+      </if>
+      <if test="record.article_content != null">
+        article_content = #{record.article_content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update b_article
+    set article_id = #{record.article_id,jdbcType=INTEGER},
+      article_user_id = #{record.article_user_id,jdbcType=INTEGER},
+      article_classify_id = #{record.article_classify_id,jdbcType=INTEGER},
+      article_title = #{record.article_title,jdbcType=VARCHAR},
+      article_date = #{record.article_date,jdbcType=TIMESTAMP},
+      article_status = #{record.article_status,jdbcType=INTEGER},
+      article_url = #{record.article_url,jdbcType=VARCHAR},
+      visitors = #{record.visitors,jdbcType=INTEGER},
+      article_content = #{record.article_content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update b_article
+    set article_id = #{record.article_id,jdbcType=INTEGER},
+      article_user_id = #{record.article_user_id,jdbcType=INTEGER},
+      article_classify_id = #{record.article_classify_id,jdbcType=INTEGER},
+      article_title = #{record.article_title,jdbcType=VARCHAR},
+      article_date = #{record.article_date,jdbcType=TIMESTAMP},
+      article_status = #{record.article_status,jdbcType=INTEGER},
+      article_url = #{record.article_url,jdbcType=VARCHAR},
+      visitors = #{record.visitors,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
