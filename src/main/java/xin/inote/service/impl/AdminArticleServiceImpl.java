@@ -21,17 +21,18 @@ public class AdminArticleServiceImpl implements AdminArticleService {
     @Autowired
     SqlMapper sqlMapper;
     @Override
-    public boolean newArticle(Article article) {
+    public int newArticle(Article article) {
 //        获取登录用户的信息
         User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
         article.setArticle_user_id(user.getUser_id());
         Date date = new Date();
         article.setArticle_date(date);
         article.setArticle_url("https://inote.xin");
-        if (articleMapper.insert(article)>0){
-            return true;
+        if (articleMapper.insertReturnId(article)>0){
+
+            return article.getArticle_id();
         }
-        return false;
+        return 0;
     }
 
     @Override

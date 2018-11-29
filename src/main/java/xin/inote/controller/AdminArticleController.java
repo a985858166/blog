@@ -49,10 +49,13 @@ public class AdminArticleController {
         Subject subject = SecurityUtils.getSubject();
         Map<String,Object> map = new HashMap();
         System.out.println(article.toString());
-        if (adminArticleService.newArticle(article)){
+        int article_id = adminArticleService.newArticle(article);
+        if (article_id != 0){
             map.put("status","ok");
+            map.put("article_id",article_id);
         }else {
             map.put("status","no");
+            map.put("article_id",0);
         }
         return map;
     }

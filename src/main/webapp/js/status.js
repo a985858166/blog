@@ -8,7 +8,7 @@ $(function () {
         }
     })
 })
-
+//获取公告
 $(function () {
     $.ajax({
         type:"post",
@@ -19,7 +19,22 @@ $(function () {
         }
     })
 })
+//获取友情链接
+$(function () {
+    $.ajax({
+        type:"post",
+        url:"/link",
+        contentType:'application/json;charset=utf-8',
+        success:function(data){//返回json结果
+            let link = data.link;
+            console.log(link);
+            for (let i = 0; i < link.length; i++) {
+                $("#link").append("<li><a href='"+link[i].link_url+"'>"+link[i].link_name+"</a></li>");
+            }
 
+        }
+    })
+});
 $(function () {
     $.ajax({
         type:"post",
@@ -41,7 +56,19 @@ $(function () {
                 }
 
             }
+            if (data.search_status == "ok"){
+                $("#classify_info").html("<div class='panel panel-default'>\n" +
+                    "    <div class='panel-body' style='overflow:hidden;'>                         \n" +
+                    "  <a href='/'><span class=\"glyphicon glyphicon-home\" aria-hidden=\"true\"></span>主页</a>/搜索  " +
+                    "</div>\n" +
+                    "</div>");
+            }
 
         }
     });
+});
+$("#search-btn").click(function () {
+    var search = $("#search").val();
+    window.location.href="/search/"+search;
+
 });

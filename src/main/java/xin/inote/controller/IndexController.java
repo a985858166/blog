@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xin.inote.pojo.Article;
 import xin.inote.pojo.Classify;
+import xin.inote.pojo.Link;
 import xin.inote.service.IndexService;
 
 import java.io.IOException;
@@ -29,6 +30,14 @@ public class IndexController {
         map.put("notice",indexService.notice().getOption_value());
         return map;
     }
+    @RequestMapping("link")
+    @ResponseBody
+    public Map link(){
+        Map<String,Object> map = new HashMap<>();
+        List<Link> list = indexService.link();
+        map.put("link",list);
+        return map;
+    }
     @RequestMapping("showArticleList")
     @ResponseBody
     public Map showArticleList () throws IOException {
@@ -38,6 +47,10 @@ public class IndexController {
         if (session.getAttribute("classify_id") != null){
             map.put("classify_status","ok");
             map.put("classify_id",Integer.parseInt(session.getAttribute("classify_id").toString()));
+        }
+        if (session.getAttribute("search") != null){
+            map.put("search_status","ok");
+            map.put("search",session.getAttribute("search"));
         }
         List<Article> list = indexService.showArticleList();
         PageInfo page = new PageInfo(list);
@@ -55,6 +68,9 @@ public class IndexController {
         if (session.getAttribute("classify_id") != null){
             map.put("classify_status","ok");
             map.put("classify_id",Integer.parseInt(session.getAttribute("classify_id").toString()));
+        }
+        if (session.getAttribute("search") != null){
+            map.put("search_status","ok");
         }
         List<Classify> list = indexService.classifyList();
         map.put("classify",list);

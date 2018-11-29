@@ -5,7 +5,7 @@ import xin.inote.pojo.Article;
 import java.util.List;
 
 public interface AdminArticleService {
-    boolean newArticle(Article article);
+    int newArticle(Article article);
     List<Article> listArticle();
 
     boolean delArticle(Article article);

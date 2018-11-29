@@ -216,6 +216,9 @@
                 return json['link']
             }
         },
+        processing:true,
+        ordering:false,
+        searching:false,
         columns:[
             {"visible":false, data: "link_id"},
             {data:'link_name'},

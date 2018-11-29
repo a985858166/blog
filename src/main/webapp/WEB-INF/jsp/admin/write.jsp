@@ -163,7 +163,13 @@
                 //数据格式是json串，商品信息
                 data: JSON.stringify(jsonData),
                 success: function (data) {//返回json结果
-                    console.log(data.status);
+                    if (data.status == "ok"){
+                        alert("发布成功");
+                        window.location.href="editWrite?article_id="+data.article_id+"";
+
+                    }else {
+                        alert("发布失败");
+                    }
                 }
             });
         });

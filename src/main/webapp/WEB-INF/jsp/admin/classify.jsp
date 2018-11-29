@@ -216,11 +216,16 @@
                 return json['classify']
             }
         },
+        processing:true,
+        ordering:false,
+        searching:false,
         columns:[
             {"visible":false, data: "classify_id"},
             {data:'classify_name'},
             {data:'classify_top'},
-            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑友链' style='color:gray'  class='btn btn-link edit-classify' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除友链'  style='color:gray' class='btn btn-link del-classify' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
+            {data:function () {
+                    return "<button data-toggle='modal' data-target='#editUser-Modal' title='编辑友链' style='color:gray'  class='btn btn-link edit-classify' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除友链'  style='color:gray' class='btn btn-link del-classify' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>";
+                }}
         ],
         language: {
             "sProcessing": "处理中...",
@@ -276,6 +281,9 @@
 
         //获取隐藏列的值
         var rowIndex = $(this).parents("tr").index();  //行号
+        var page = table.page.info().page;
+        var pageLength = table.page.info().length;
+        rowIndex = page*pageLength+rowIndex;
         var classify_id = table.row(rowIndex).data().classify_id;
         var classify_name = table.row(rowIndex).data().classify_name;
         var classify_top = table.row(rowIndex).data().classify_top;

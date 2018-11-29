@@ -152,7 +152,6 @@
             "url":"/b-admin/listArticle",
             "type":"post",
             "dataSrc":function (json) {
-                console.log(JSON.stringify(json['listArticle']))
                 return json['listArticle']
             }
         },
@@ -171,7 +170,17 @@
                     var s = time.getSeconds();//秒
                     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
                 }},
-            {data:null,"defaultContent":"<button data-toggle='modal' data-target='#editUser-Modal' title='编辑文章' style='color:gray'  class='btn btn-link edit-article' type='button'><i style='font-size:15px' class='fa fa-edit'></i></button><button title='删除文章'  style='color:gray' class='btn btn-link del-article' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
+            {data:function (row,type,val,meta) {
+                    return "<a href='editWrite?article_id="+row.article_id+"' title='编辑' style='color:gray' class='btn btn-link'><i style='font-size:15px' class='fa fa-edit'></i></a><button data-id='"+row.article_id+"' title='删除文章'  style='color:gray' class='btn btn-link del-article' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>";
+                }}
+        ],
+        columnDefs:[
+            {
+                targets:[5],
+                searchable: false,
+                orderable: false
+
+            }
         ],
         language: {
             "sProcessing": "处理中...",
@@ -199,10 +208,7 @@
         }})
     //删除
     $(document).on('click', '.del-article', function(e){
-
-        //获取隐藏列的值
-        var rowIndex = $(this).parents("tr").index();  //行号
-        var id = table.row(rowIndex).data().article_id;
+        var id = $(this).data('id');
         console.log(id);
 
         if (confirm("确定要删除该文章吗")) {
@@ -217,22 +223,12 @@
                 data:JSON.stringify(jsonData),
                 success:function(data){//返回json结果
                     console.log(data.status)
-                    table.row(rowIndex).remove().draw();
+                    table.ajax.reload();
                 }
             });
         }
     });
-    //编辑
-    $(document).on('click', '.edit-article', function(e){
 
-        //获取隐藏列的值
-        var rowIndex = $(this).parents("tr").index();  //行号
-        var id = table.row(rowIndex).data().article_id;
-        console.log(id);
-        window.location.href='editWrite?article_id='+id;
-
-
-    });
 
 </script>
 </html>

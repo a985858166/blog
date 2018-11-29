@@ -46,16 +46,16 @@
                       </ul>
                       <form action="#" method="get" class=" navbar-form navbar-left">
                           <div class="input-group">
-                              <input type="text" name="q" class="form-control" placeholder="搜索">
+                              <input type="text" id="search" class="form-control" placeholder="搜索">
                               <span class="input-group-btn">
-                      <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                      <button type="button" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                       </button>
                     </span>
                           </div>
                       </form>
                       <ul class="nav navbar-nav navbar-right" id="login">
-                          <li><a href="#">登录</a></li>
-                          <li><a href="#">注册</a></li>
+                          <%--<li><a href="#">登录</a></li>--%>
+                          <%--<li><a href="#">注册</a></li>--%>
                       </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -66,11 +66,11 @@
       </header>
       <!-- Full Width Column -->
       <div class="content-wrapper">
-          <div class="container">
+          <div class="container-fluid">
               <!-- 中间 -->
               <div class="row" style="margin-top:15px">
                   <!-- 左边主体 -->
-                  <div class="col-md-8">
+                  <div class="col-md-offset-1 col-md-8">
                       <div class="panel panel-default">
                           <div class="panel-body">
                               <div class="panel panel-info">
@@ -116,13 +116,15 @@
                               <div id="list_comment">
 
                               </div>
+                              <ul class="pagination" id="paging">
+                              </ul>
                               <%--评论结束--%>
                           </div>
                       </div>
 
                   </div>
                   <!-- 右边信息 -->
-                  <div class="col-md-3 col-md-offset-1 visible-md-block visible-lg-block">
+                  <div class="col-md-3 visible-md-block visible-lg-block">
                       <div class="panel panel-primary">
                           <div class="panel-heading">公告</div>
                           <div class="panel-body" style="overflow:hidden;" id="notice">

@@ -18,8 +18,9 @@ import java.util.List;
 public class PageController {
     @Autowired
     SqlMapper sqlMapper;
-    @RequestMapping({"index","/","/page/{number:\\d+}","/classify/{classify_id:\\d+}","/classify/{classify_id:\\d+}/page/{number:\\d+}"})
-    public String index(@PathVariable(required = false) String number,@PathVariable(required = false) String classify_id){
+    @RequestMapping({"index","/","/page/{number:\\d+}","/classify/{classify_id:\\d+}","/classify/{classify_id:\\d+}/page/{number:\\d+}",
+    "/search/{search:.+}","/search/{search:.+}/page/{number:\\d+}"})
+    public String index(@PathVariable(required = false) String number,@PathVariable(required = false) String classify_id,@PathVariable(required = false) String search){
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         if (number != null){
@@ -31,6 +32,11 @@ public class PageController {
             session.setAttribute("classify_id",classify_id);
         }else {
             session.removeAttribute("classify_id");
+        }
+        if (search != null){
+            session.setAttribute("search",search);
+        }else {
+            session.removeAttribute("search");
         }
         return "index";
     }

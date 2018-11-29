@@ -17,7 +17,7 @@ $(function () {
                     "                              <div class=\"panel-footer\">\n" +
                     "                                  <div class=\"row\">\n" +
                     "                                      <div class=\"col-xs-3\">\n" +
-                    "                                          <i class=\"fa fa-fw fa-commenting-o\"></i>评论\n" +
+                    "                                          <i class=\"fa fa-fw fa-commenting-o\"></i>"+articeList[i].commentNum+"\n" +
                     "                                      </div>\n" +
                     "                                      <div class=\"col-xs-3\">\n" +
                     "                                          <i class=\"fa fa-fw fa-calendar\"></i>"+getDate(articeList[i].article_date)+"\n" +
@@ -40,6 +40,10 @@ $(function () {
             var pagePathOne = "/page/";
             if (data.classify_status == "ok"){
                 pagePathOne = "/classify/"+data.classify_id+"/page/"
+            }
+            if (data.search_status == "ok"){
+                $("#search").val(data.search);
+                pagePathOne = "/search/"+data.search+"/page/"
             }
             if (pageNum != 1){
                 $("#paging").append("<li><a href='"+pagePathOne+1+"'>首页</a></li>");

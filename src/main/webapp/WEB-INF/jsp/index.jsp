@@ -44,16 +44,16 @@
                       </ul>
                       <form action="#" method="get" class=" navbar-form navbar-left">
                           <div class="input-group">
-                              <input type="text" name="q" class="form-control" placeholder="搜索">
+                              <input type="text" id="search" class="form-control" placeholder="搜索">
                               <span class="input-group-btn">
-                      <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                      <button type="button" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                       </button>
                     </span>
                           </div>
                       </form>
                       <ul class="nav navbar-nav navbar-right" id="login">
-                          <li><a href="#">登录</a></li>
-                          <li><a href="#">注册</a></li>
+                          <%--<li><a href="#">登录</a></li>--%>
+                          <%--<li><a href="#">注册</a></li>--%>
                       </ul>
                   </div>
                   <!-- /.navbar-collapse -->
@@ -89,6 +89,14 @@
                               公告为空
                           </div>
                       </div>
+                      <div class="panel panel-primary">
+                          <div class="panel-heading">友情链接</div>
+                          <div class="panel-body" style="overflow:hidden;">
+                              <ul class="nav nav-pills" id="link">
+
+                              </ul>
+                          </div>
+                      </div>
                   </div>
               </div>
 
@@ -99,7 +107,6 @@
       <!-- /.content-wrapper -->
       <footer class="main-footer">
           <div class="container">
-
               <strong>© 2018 zhenying的博客.|闽ICP备17000754号</strong>
           </div>
           <!-- /.container -->

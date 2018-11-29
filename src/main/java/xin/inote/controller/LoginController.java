@@ -44,10 +44,10 @@ public class LoginController {
         Map<String,Object> map = new HashMap();
         Subject subject = SecurityUtils.getSubject();
         if (subject.getPrincipal() != null){
-            map.put("ul","<li><a href='/b-admin/information'>后台管理</a></li>" +
-                    "<li><a href='/doLogout'>注销</a></li>");
+            map.put("ul","<li><a href='/b-admin/information'><i class=\"fa fa-fw fa-cogs\"></i>&nbsp;后台管理</a></li>" +
+                    "<li><a href='/doLogout'><i class=\"fa fa-fw fa-sign-in\"></i>&nbsp;注销</a></li>");
         }else {
-            map.put("ul","<li><a href='/login'>登录</a></li>");
+            map.put("ul","<li><a href='/login'><i class=\"fa fa-fw fa-user\"></i>&nbsp;登录</a></li>");
         }
         return map;
     }

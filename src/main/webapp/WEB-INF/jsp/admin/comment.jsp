@@ -177,6 +177,7 @@
                 return data.commentList;
             }
         },
+
         columns:[
             {"visible":false, data: "comment_id"},
             {data:'comment_author_name'},
@@ -185,7 +186,9 @@
             {data:'comment_author_url'},
             {data:'article_title'},
             {data:'comment_author_date'},
-            {data:null,"defaultContent":"</button><button title='删除友链'  style='color:gray' class='btn btn-link del-comment' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>"}
+            {data:function (row) {
+                    return "</button><button title='删除评论' data-id='"+row.comment_id+"'  style='color:gray' class='btn btn-link del-comment' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>";
+                }}
         ],
         language: {
             "sProcessing": "处理中...",
@@ -215,8 +218,8 @@
     $(document).on('click', '.del-comment', function(e){
 
         //获取隐藏列的值
-        var rowIndex = $(this).parents("tr").index();  //行号
-        var id = table.row(rowIndex).data().comment_id;
+        var id = $(this).data("id");
+
         console.log(id);
 
         if (confirm("确定要删除该友情链接吗？")) {
@@ -231,7 +234,7 @@
                 data:JSON.stringify(jsonData),
                 success:function(data){//返回json结果
                     console.log(data.status)
-                    table.row(rowIndex).remove().draw();
+                    table.ajax.reload();
                 }
             });
         }

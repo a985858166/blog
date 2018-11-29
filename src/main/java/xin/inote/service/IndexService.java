@@ -2,6 +2,7 @@ package xin.inote.service;
 
 import xin.inote.pojo.Article;
 import xin.inote.pojo.Classify;
+import xin.inote.pojo.Link;
 import xin.inote.pojo.Option;
 
 import java.io.IOException;
@@ -13,4 +14,6 @@ public interface IndexService {
     List<Article> showArticleList() throws IOException;
 
     List<Classify> classifyList();
+
+    List<Link> link();
 }
