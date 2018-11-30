@@ -7,7 +7,12 @@ $(function () {
         success:function(data){
             console.log(data.article);
             article = data.article;
+            $("#article_date").append(getDate(article.article_date));
             $("#article_title").text(article.article_title);
+            //console.log(article.user.user_username);
+            if (article.user != null){
+                $("#user_username").append(article.user.user_username);
+            }
             $("#article_content").append(article.article_content);
             listComment(1);
         }
@@ -59,6 +64,7 @@ function listComment (e) {
                     "                                      <p>"+list[i].comment_author_content+"</p>\n" +
                     "                                  </div>");
             }
+            $("#comment_total").text(data.total);
             var pages = data.pages;
             var pageNum = data.pageNum;
             console.log(pages);
@@ -120,6 +126,21 @@ function getDate(obj) {
     // return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
 }
+
+/* 返回顶部按钮 */
+
+$('#backtotop').click(function () {
+
+    $('body,html').animate({
+
+        scrollTop: 0
+
+    }, 600);
+
+    return false;
+
+});
+
 
 
 

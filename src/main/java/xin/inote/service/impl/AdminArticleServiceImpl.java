@@ -28,6 +28,7 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         Date date = new Date();
         article.setArticle_date(date);
         article.setArticle_url("https://inote.xin");
+        article.setVisitors(0);
         if (articleMapper.insertReturnId(article)>0){
 
             return article.getArticle_id();

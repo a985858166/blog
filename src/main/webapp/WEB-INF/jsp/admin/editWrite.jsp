@@ -124,9 +124,9 @@
             </select>
             <span style="float: right;">
 
-        <button type="button" class="release btn btn-primary btn-lg" id="release" data-status="1">更新</button>
+        <button type="button" class="release btn btn-primary btn-lg" id="release" data-status="1">更新(状态改为发布)</button>
         &nbsp;&nbsp;
-        <button type="button" class="release btn btn-primary btn-lg" id="draft" data-status="2">草稿</button>
+        <button type="button" class="release btn btn-primary btn-lg" id="draft" data-status="2">更新(状态改为草稿)</button>
             </span>
         </section>
     </div>

@@ -29,7 +29,7 @@ $(function () {
             let link = data.link;
             console.log(link);
             for (let i = 0; i < link.length; i++) {
-                $("#link").append("<li><a href='"+link[i].link_url+"'>"+link[i].link_name+"</a></li>");
+                $("#link").append("<li><a href='"+link[i].link_url+"' target='view_window'>"+link[i].link_name+"</a></li>");
             }
 
         }
@@ -71,4 +71,11 @@ $("#search-btn").click(function () {
     var search = $("#search").val();
     window.location.href="/search/"+search;
 
+});
+
+$(".content-wrapper").click(function () {
+    $("#navbar-collapse").collapse('hide');
+});
+$(".content-wrapper").on("touchstart",function () {
+    $("#navbar-collapse").collapse('hide');
 });

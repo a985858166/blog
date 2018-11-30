@@ -56,6 +56,10 @@ public class IndexServiceImpl implements IndexService {
         }
         PageHelper.startPage(pageNum, 5);
         ArticleExample articleExample = new ArticleExample();
+//        按时间排序
+        articleExample.setOrderByClause("article_date DESC");
+//        必须状态为发布
+        articleExample.or().andArticle_statusEqualTo(1);
         if (session.getAttribute("classify_id") != null){
             articleExample.or().andArticle_classify_idEqualTo(Integer.parseInt(session.getAttribute("classify_id").toString()));
         }

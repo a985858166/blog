@@ -28,13 +28,13 @@
           <div class="form-group input-lg">
                   <input type="password" id="password" name="password" class="form-control" placeholder="密码">
             </div>
-            <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="" id="" checked> 记住密码
-                        </label>
-                </div>
-            </div>
+            <%--<div class="form-group">--%>
+                    <%--<div class="checkbox">--%>
+                        <%--<label>--%>
+                            <%--<input type="checkbox" name="" id="" checked> 记住密码--%>
+                        <%--</label>--%>
+                <%--</div>--%>
+            <%--</div>--%>
             <h3 id="info" style="color:red;">
                 ${error}
             </h3>

@@ -79,8 +79,8 @@
                                   </div>
                                   <div class="panel-body clearfix"><!-- clearfix清除浮动、pull-left左浮动、pull-right右浮动 -->
                                       <p class="lead">
-                                          <small>UpDate：2018-07-21 16:34</small><br>
-                                          <small>Author: TabKey9 点赞：0  <span>评论：0 </span></small>
+                                          <small id="article_date">发布时间:</small><br>
+                                          <small id="user_username">作者:</small>
                                       </p><hr>
                                       <div id="article_content" style="overflow:hidden;">
                                       </div>
@@ -88,7 +88,7 @@
                               </div>
                               <%--评论开始--%>
                               <div class="page-header">
-                                  <h3>评论</h3>
+                                  <h3>评论(<small id="comment_total">10</small>)</h3>
                               </div>
                               <div class="panel plane-default">
                                   <div class="panel-body">
@@ -118,6 +118,7 @@
                               </div>
                               <ul class="pagination" id="paging">
                               </ul>
+
                               <%--评论结束--%>
                           </div>
                       </div>
@@ -133,15 +134,13 @@
                       </div>
                   </div>
               </div>
-
-
           </div>
           <!-- /.container -->
       </div>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
           <div class="container">
-
+              <a class="to-top" style="font-size: 50px;"><i class="fa fa-fw fa-arrow-up"></i></a>
               <strong>© 2018 zhenying的博客.|闽ICP备17000754号</strong>
           </div>
           <!-- /.container -->
@@ -159,5 +158,8 @@
 <script type="text/javascript" src="/wangEditor/wangEditor.js"></script>
 <script type="text/javascript" src="/js/status.js"></script>
 <script type="text/javascript" src="/js/article.js"></script>
-
+<script type="text/javascript" src="/js/jquery.toTop.min.js"></script>
+<script>
+    $('.to-top').toTop();
+</script>
 </html>

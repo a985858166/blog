@@ -43,6 +43,7 @@ public class CommentController {
         PageInfo page = new PageInfo(list);
         map.put("pageNum",page.getPageNum());
         map.put("pages",page.getPages());
+        map.put("total",page.getTotal());
         map.put("list",list);
         return map;
     }

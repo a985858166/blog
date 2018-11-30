@@ -119,6 +119,7 @@
                                 <th width="8%" class="min-mobile-l">作者</th>
                                 <th width="8%" class="min-mobile-l">分类目录</th>
                                 <th width="8%" class="min-mobile-l">日期</th>
+                                <th width="8%" class="min-mobile-l">状态</th>
                                 <th width="8%" class="min-mobile-l">操作</th>
                             </tr>
                             </thead>
@@ -169,6 +170,13 @@
                     var mm = time.getMinutes();//分
                     var s = time.getSeconds();//秒
                     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+                }},
+            {data:function (row) {
+                    if (row.article_status == 1){
+                        return "已发布";
+                    } else {
+                        return "草稿";
+                    }
                 }},
             {data:function (row,type,val,meta) {
                     return "<a href='editWrite?article_id="+row.article_id+"' title='编辑' style='color:gray' class='btn btn-link'><i style='font-size:15px' class='fa fa-edit'></i></a><button data-id='"+row.article_id+"' title='删除文章'  style='color:gray' class='btn btn-link del-article' type='button'><i style='font-size:15px' class='fa fa-trash-o'></i></button>";

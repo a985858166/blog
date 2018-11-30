@@ -11,7 +11,7 @@ $(function () {
                 $("#articeList").append("<div class=\"bs-example\" data-example-id=\"contextual-panels\">\n" +
                     "                          <div class=\"panel panel-info\">\n" +
                     "                              <div class=\"panel-heading\">\n" +
-                    "                                  <h3 class=\"panel-title\"><a href='/article/"+articeList[i].article_id+"'>"+articeList[i].article_title+"</a></h3>\n" +
+                    "                                  <h3 class=\"panel-title\"><a href='/article/"+articeList[i].article_id+"' target='view_window'>"+articeList[i].article_title+"</a></h3>\n" +
                     "                              </div>\n" +
                     "                              <div class=\"panel-body\">"+articeList[i].article_content+"</div>\n" +
                     "                              <div class=\"panel-footer\">\n" +
@@ -26,7 +26,7 @@ $(function () {
                     "                                          <i class=\"fa fa-fw fa-user\"></i>"+articeList[i].user.user_username+"\n" +
                     "                                      </div>\n" +
                     "                                      <div class=\"col-xs-3\">\n" +
-                    "                                          <i class=\"fa fa-fw fa-eye\"></i>29\n" +
+                    "                                          <i class=\"fa fa-fw fa-eye\"></i>"+articeList[i].visitors+"\n" +
                     "                                      </div>\n" +
                     "                                  </div>\n" +
                     "\n" +
