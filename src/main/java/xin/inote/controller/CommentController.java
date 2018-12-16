@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xin.inote.pojo.Comment;
 import xin.inote.service.CommentService;
+import xin.inote.util.AntiXSS;
+import xin.inote.util.CookieUtils;
+import xin.inote.util.RegexUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +26,21 @@ public class CommentController {
     CommentService commentService;
     @RequestMapping("addComment")
     @ResponseBody
-    public Map addComment(@RequestBody Comment comment){
+    public Map addComment(@RequestBody Comment comment, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse){
         Map<String,Object> map = new HashMap<>();
-        if (commentService.addComment(comment)){
-            map.put("status","ok");
+        comment.setComment_author_content(AntiXSS.replaceHtmlCode(comment.getComment_author_content()));
+        comment.setComment_author_name(AntiXSS.replaceHtmlCode(comment.getComment_author_name()));
+        if ((RegexUtils.checkURL(comment.getComment_author_url()) || comment.getComment_author_url() == null || comment.getComment_author_url() == "") && RegexUtils.checkEmail(comment.getComment_author_email())){
+            if (commentService.addComment(comment)){
+                CookieUtils.setCookie(httpServletRequest,httpServletResponse,"user",String.format("%s:%s:%s",comment.getComment_author_name(),comment.getComment_author_email(),comment.getComment_author_url()),60*60*24*365);
+                map.put("status","ok");
+            }else {
+                map.put("status","on");
+            }
         }else {
             map.put("status","on");
         }
+
         return map;
     }
     @RequestMapping("listComment")

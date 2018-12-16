@@ -118,16 +118,32 @@
             </div>
             <br>
             <br>
-            <label for="selectClassify">文章分类:</label>
-            <select class="form-control" id="selectClassify" style="width:30%;display:inline;">
+            <%--开始--%>
+            <form class="form-inline">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>文章分类:</label>
+                            <select class="form-control" id="selectClassify">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-2">
+                        <div class="form-group">
+                            <label class="sr-only"></label>
+                            <button type="button" class="release btn btn-primary" id="release" data-status="1">发布</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="sr-only"></label>
+                            <button type="button" class="release btn btn-primary" id="draft" data-status="2">草稿</button>
+                        </div>
 
-            </select>
-            <span style="float: right;">
-
-        <button type="button" class="release btn btn-primary btn-lg" id="release" data-status="1">发布</button>
-        &nbsp;&nbsp;
-        <button type="button" class="release btn btn-primary btn-lg" id="draft" data-status="2">草稿</button>
-            </span>
+                    </div>
+                </div>
+            </form>
+            <%--结束--%>
         </section>
     </div>
     <!-- ./wrapper -->

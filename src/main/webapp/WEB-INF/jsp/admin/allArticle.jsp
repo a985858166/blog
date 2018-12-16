@@ -190,6 +190,7 @@
 
             }
         ],
+        "order": [[ 0, "desc" ]],
         language: {
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",

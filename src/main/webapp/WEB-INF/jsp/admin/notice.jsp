@@ -104,10 +104,17 @@
                       ${notice}
                   </div>
                   <br>
-                  <br>
-                  <span style="float: right;">
-                      <button type="button" id="change" class="btn btn-primary btn-lg">更改公告</button>
-                  </span>
+                  <form class="form">
+                      <div class="row">
+                          <div class="col-md-offset-9 col-md-3">
+                              <div class="form-group">
+                                  <label class="sr-only"></label>
+                                  <button type="button" id="change" class="btn btn-primary btn-lg">更改公告</button>
+                              </div>
+
+                          </div>
+                      </div>
+                  </form>
           </section>
       </div>
     <!-- ./wrapper -->
@@ -138,7 +145,11 @@
                 //数据格式是json串，商品信息
                 data:JSON.stringify(jsonData),
                 success:function(data){//返回json结果
-                    alert(data.status);
+                    if (data.status == "ok"){
+                        alert("公告修改成功");
+                    }else {
+                        alert("公告修改失败");
+                    }
                 }
             });
         });

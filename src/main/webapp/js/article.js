@@ -104,7 +104,7 @@ function listComment (e) {
                 $("#paging").append("<li class='disabled'><a href='javascript:void(0);'>下一页</a></li>");
             }
             if (pageNum < pages){
-                $("#paging").append("<li><a href='javascript:void(0); onclick='listComment("+pages+")'>尾页</a></li>");
+                $("#paging").append("<li><a href='javascript:void(0);' onclick='listComment("+pages+")'>尾页</a></li>");
             }else {
                 $("#paging").append("<li class='disabled'><a href='javascript:void(0);'>尾页</a></li>");
             }
@@ -113,6 +113,19 @@ function listComment (e) {
         }
     });
 }
+//获取cookie里的用户名和邮箱
+$(function () {
+   let userInfo = getCookie("user");
+   if (userInfo){
+       let userInfoArr = userInfo.split(":");
+       $("#comment_name").val(userInfoArr[0]);
+       $("#comment_email").val(userInfoArr[1]);
+       $("#comment_url").val(userInfoArr[2]);
+   }
+
+
+
+});
 
 
 function getDate(obj) {
@@ -125,6 +138,7 @@ function getDate(obj) {
     var s = time.getSeconds();//秒
     // return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
     return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+    // return y+"-"+m+"-"+d;
 }
 
 /* 返回顶部按钮 */

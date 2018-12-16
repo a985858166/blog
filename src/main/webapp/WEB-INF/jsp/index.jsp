@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="/css/skin/skin-black.min.css">
   <link rel="stylesheet" href="/css/dataTables.bootstrap.min.css" />
   <link rel="stylesheet" href="/css/menu.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   
 
 </head>
@@ -42,9 +41,10 @@
                           <%--<li><a href="#">系统运维</a></li>--%>
                           <%--<li><a href="#">资源分享</a></li>--%>
                       </ul>
-                      <form action="#" method="get" class=" navbar-form navbar-left">
+                      <form class=" navbar-form navbar-left" action="#">
+                          <input type="text" style="display:none"/>
                           <div class="input-group">
-                              <input type="text" id="search" class="form-control" placeholder="搜索">
+                              <input type="text" id="search" class="form-control" placeholder="搜索"/>
                               <span class="input-group-btn">
                       <button type="button" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                       </button>

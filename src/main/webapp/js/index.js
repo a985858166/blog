@@ -15,17 +15,17 @@ $(function () {
                     "                              </div>\n" +
                     "                              <div class=\"panel-body\">"+articeList[i].article_content+"</div>\n" +
                     "                              <div class=\"panel-footer\">\n" +
-                    "                                  <div class=\"row\">\n" +
-                    "                                      <div class=\"col-xs-3\">\n" +
+                    "                                  <div class='row'>\n" +
+                    "                                      <div class='col-sm-3 col-xs-6'>\n" +
                     "                                          <i class=\"fa fa-fw fa-commenting-o\"></i>"+articeList[i].commentNum+"\n" +
                     "                                      </div>\n" +
-                    "                                      <div class=\"col-xs-3\">\n" +
+                    "                                      <div class='col-sm-3 col-xs-6'>\n" +
                     "                                          <i class=\"fa fa-fw fa-calendar\"></i>"+getDate(articeList[i].article_date)+"\n" +
                     "                                      </div>\n" +
-                    "                                      <div class=\"col-xs-3\">\n" +
+                    "                                      <div class='col-sm-3 col-xs-6'>\n" +
                     "                                          <i class=\"fa fa-fw fa-user\"></i>"+articeList[i].user.user_username+"\n" +
                     "                                      </div>\n" +
-                    "                                      <div class=\"col-xs-3\">\n" +
+                    "                                      <div class='col-sm-3 col-xs-6'>\n" +
                     "                                          <i class=\"fa fa-fw fa-eye\"></i>"+articeList[i].visitors+"\n" +
                     "                                      </div>\n" +
                     "                                  </div>\n" +
@@ -97,5 +97,6 @@ function getDate(obj) {
     var mm = time.getMinutes();//分
     var s = time.getSeconds();//秒
     // return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
-    return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+    // return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s;
+    return y+"-"+m+"-"+d;
 }

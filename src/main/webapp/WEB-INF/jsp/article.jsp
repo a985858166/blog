@@ -92,7 +92,7 @@
                               </div>
                               <div class="panel plane-default">
                                   <div class="panel-body">
-                                      <form action="">
+                                      <form action="" id="inputForm">
                                           <div class="form-group">
                                               <label class="sr-only"></label>
                                               <input type="text" id="comment_name" class="form-control" placeholder="您的名称（必填）">
@@ -103,7 +103,7 @@
                                           </div>
                                           <div class="form-group">
                                               <label class="sr-only"></label>
-                                              <input type="text" id="comment_url" class="form-control" placeholder="个人网站(非必填)">
+                                              <input type="text" id="comment_url" class="form-control comment_url" placeholder="个人网站(非必填)">
                                           </div>
                                           <div class="form-group">
                                               <label class="sr-only"></label>
@@ -159,7 +159,25 @@
 <script type="text/javascript" src="/js/status.js"></script>
 <script type="text/javascript" src="/js/article.js"></script>
 <script type="text/javascript" src="/js/jquery.toTop.min.js"></script>
+<script type="text/javascript" src="/jquery-validation/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/jquery-validation/additional-methods.min.js"></script>
+<script type="text/javascript" src="/jquery-validation/messages_zh.min.js"></script>
 <script>
     $('.to-top').toTop();
+    //
+    $.validator.addMethod("comment_url", function(value, element) {
+        var length = value.length;
+        var mobile =  /^http(s?):\/\/(?:[A-za-z0-9-]+\.)+[A-za-z]{2,4}(?:[\/\?#][\/=\?%\-&~`@[\]\':+!\.#\w]*)?$/;
+        return this.optional(element) || mobile.test(value);
+    }, "请输入有效的网址1");
+    //限制
+    $("#inputForm").validate({
+        errorElement: 'span',
+        errorClass: 'help-block',
+        errorPlacement:function (error,element) {
+            element.parent().attr("class","form-group has-error");
+            error.insertAfter(element);
+        }
+    });
 </script>
 </html>

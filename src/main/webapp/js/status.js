@@ -79,3 +79,23 @@ $(".content-wrapper").click(function () {
 $(".content-wrapper").on("touchstart",function () {
     $("#navbar-collapse").collapse('hide');
 });
+
+//获取cookie
+function getCookie(key) {
+    var cookieArr = document.cookie.split('; ');
+    for(var i = 0; i < cookieArr.length; i++) {
+        var arr = cookieArr[i].split('=');
+        if(arr[0] === key) {
+            return arr[1];
+        }
+    }
+    return false;
+}
+
+//回车按键绑定
+$('#search').bind('keypress', function (event) {
+    if (event.keyCode == "13") {
+        $("#search-btn").click();
+        console.log("aa");
+    }
+})

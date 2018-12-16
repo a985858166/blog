@@ -58,13 +58,13 @@ public class IndexServiceImpl implements IndexService {
         ArticleExample articleExample = new ArticleExample();
 //        按时间排序
         articleExample.setOrderByClause("article_date DESC");
-//        必须状态为发布
-        articleExample.or().andArticle_statusEqualTo(1);
+        ArticleExample.Criteria criteria = articleExample.createCriteria();
+        criteria.andArticle_statusEqualTo(1);
         if (session.getAttribute("classify_id") != null){
-            articleExample.or().andArticle_classify_idEqualTo(Integer.parseInt(session.getAttribute("classify_id").toString()));
+            criteria.andArticle_classify_idEqualTo(Integer.parseInt(session.getAttribute("classify_id").toString()));
         }
         if (session.getAttribute("search") != null){
-            articleExample.or().andArticle_titleLike("%"+session.getAttribute("search").toString()+"%");
+            criteria.andArticle_titleLike("%"+session.getAttribute("search").toString()+"%");
         }
         List<Article> list = articleMapper.selectByExampleWithBLOBs(articleExample);
         for (int i = 0; i < list.size(); i++) {
